@@ -430,9 +430,7 @@ func _process_cameras() -> void:
 
 func _process_teleports() -> void:
 	for body_id: int in _watchlist_teleportables.keys():
-		if not is_instance_id_valid(body_id):
-			print("Removing invalid body id: ", body_id)
-			print(_watchlist_teleportables)
+		if not is_instance_id_valid(body_id):  # Watched body has been freed
 			_erase_tp_metadata(body_id)
 			continue
 		
