@@ -160,7 +160,7 @@ var view_direction: TeleportDirection = TeleportDirection.FRONT_AND_BACK
 ## [br][br]
 ## You are expected to toggle this in the editor. For runtime teleport toggling, see 
 ## [method activate] and [method deactivate].
-var is_teleport: bool:
+var is_teleport: bool = true:
 	set(v):
 		is_teleport = v
 		if caused_by_user_interaction():
@@ -295,6 +295,7 @@ func _editor_ready() -> void:
 	process_physics_priority = 100
 	
 	_setup_mesh()
+	_setup_teleport()
 	
 	self.group_node(self)
 
