@@ -286,7 +286,7 @@ var _watchlist_teleportables: Dictionary[int, TeleportableMeta] = {}
 
 const _PORTAL_SHADER = preload("uid://bhdb2skdxehes")
 
-## _ready(), but only in editor.
+# _ready(), but only in editor.
 func _editor_ready() -> void:
 	add_to_group(PortalSettings.get_setting("portals_group_name"), true)
 	set_notify_transform(true)
@@ -322,6 +322,10 @@ func _setup_teleport():
 		if teleport_collider:
 			teleport_collider.queue_free()
 			_teleport_collider_path = NodePath("")
+		return
+	
+	# Teleport is already set up
+	if teleport_area and teleport_collider:
 		return
 	
 	var area = Area3D.new()
