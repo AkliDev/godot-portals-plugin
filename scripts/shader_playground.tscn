@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://664na4csmqe"]
+[gd_scene load_steps=11 format=4 uid="uid://664na4csmqe"]
 
 [ext_resource type="Shader" uid="uid://xoa3hj7pynf" path="res://scripts/clipping_shader.gdshader" id="1_picon"]
 [ext_resource type="PackedScene" uid="uid://dxvxy65pv5hoe" path="res://assets/prototyping/prop_sphere.tscn" id="2_xywcf"]
+[ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="3_efj51"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_picon"]
 render_priority = 0
@@ -112,6 +113,22 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tk8yd"]
 
+[sub_resource type="ArrayMesh" id="ArrayMesh_tk8yd"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -1, 1, 1, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAvwAAAD8AAAAAAAAAPwAAAD8AAAAAAAAAvwAAAL8AAAAAAAAAPwAAAL8AAAAAAAAAvwAAAD8AAIC/AAAAPwAAAD8AAIC/AAAAvwAAAL8AAIC/AAAAPwAAAL8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("3_efj51")
+size = Vector3(1, 1, 1)
+metadata/_custom_type_script = "uid://bxcel82b180o3"
+
 [node name="ShaderPlayground" type="Node3D"]
 
 [node name="ShaderTest" type="MeshInstance3D" parent="."]
@@ -119,11 +136,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0102, 0.185177, 0.172441)
 mesh = SubResource("BoxMesh_efj51")
 
 [node name="PropCube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.852786, -0.52226, 0, 0.52226, 0.852786, 0, 0, -0.0342)
+transform = Transform3D(1, 0, 0, 0, 0.852786, -0.52226, 0, 0.52226, 0.852786, 0, 0, 1.06521)
 material_override = SubResource("ShaderMaterial_efj51")
 mesh = SubResource("BoxMesh_tk8yd")
 
 [node name="PropSphere" parent="." instance=ExtResource("2_xywcf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.91982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.24852)
 
 [node name="ShaderChecker" type="Node" parent="."]
+
+[node name="PortalBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4601)
+mesh = SubResource("ArrayMesh_tk8yd")
