@@ -17,25 +17,29 @@ signal on_teleport(node: Node3D)
 signal on_teleport_receive(node: Node3D)
 
 ## The portal starts rendering again, [member portal_mesh] becomes visible and teleport
-## activates (if the portal is teleporting).
+## activates (if the portal is teleporting).[br][br]
+## Also see [method deactivate]
 func activate() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	
+	# Viewports have been destroyed
 	if portal_viewport == null:
 		_setup_cameras()
-		portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
 	
 	show()
 	
 
-## Disables rendering, teleportation and hides the portal mesh. Does NOT clean up the
-## internal viewport.
+## Disables processing and hides the portal. Optionally destroys the viewports, freeing memory.
+## Set [member start_deactivated] to [code]true[/code] to avoid viewport allocation at the start of 
+## the game. [br][br]
+## Also see [method activate]
 func deactivate(destroy_viewports: bool = false) -> void:
 	hide()
 	_watchlist_teleportables.clear()
 	
 	if destroy_viewports:
 		if portal_viewport:
+			print("[%s] freeing viewport" % name)
 			portal_viewport.queue_free()
 			portal_viewport = null
 			portal_camera = null
@@ -51,9 +55,9 @@ func forward_raycast(raycast: RayCast3D) -> CollisionObject3D:
 	var goal := to_exit_position(raycast.to_global(raycast.target_position))
 	
 	var query = PhysicsRayQueryParameters3D.create(
-		start, 
-		goal, 
-		raycast.collision_mask, 
+		start,
+		goal,
+		raycast.collision_mask,
 		[self.teleport_area, exit_portal.teleport_area]
 	)
 	query.collide_with_areas = raycast.collide_with_areas
@@ -251,6 +255,13 @@ const TELEPORT_ROOT_META: StringName = &"teleport_root"
 var teleport_interactions: int = TeleportInteractions.CALLBACK \
 									| TeleportInteractions.PLAYER_UPRIGHT
 
+
+## If the portal is not immediately visible on scene start, you can start it in [i]disabled 
+## mode[/i]. This just means it will not create the appropriate subviewports, saving memory. 
+## It will also not be processed.[br][br]
+## You have to call [method activate] on it to wake it up! Also see [method disable]
+var start_deactivated: bool = false
+
 #region INTERNALS
 
 @export_storage var _portal_thickness: float = 0.05:
@@ -394,16 +405,16 @@ func _ready() -> void:
 		player_camera = get_viewport().get_camera_3d()
 		assert(player_camera != null, "Player camera is missing!")
 	
-	_setup_cameras()
-	
-	assert(portal_viewport != null, "[%s] Portal should have a viewport!" % name)
 	
 	var mat: ShaderMaterial = ShaderMaterial.new()
 	mat.shader = _PORTAL_SHADER
 	portal_mesh.material_override = mat
-	portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
 	
-	get_viewport().size_changed.connect(_on_window_resize)
+	if not start_deactivated:
+		_setup_cameras()
+		get_viewport().size_changed.connect(_on_window_resize)
+	else:
+		deactivate.call_deferred(true)
 	
 	if is_teleport:
 		assert(teleport_area, "Teleport area should be already set up from editor")
@@ -456,7 +467,7 @@ func _process_cameras() -> void:
 
 func _process_teleports() -> void:
 	for body_id: int in _watchlist_teleportables.keys():
-		if not is_instance_id_valid(body_id):  # Watched body has been freed
+		if not is_instance_id_valid(body_id): # Watched body has been freed
 			_erase_tp_metadata(body_id)
 			continue
 		
@@ -565,6 +576,7 @@ func _setup_cameras() -> void:
 	assert(portal_viewport == null)
 	
 	if exit_portal != null:
+		print("[%s] creation viewport" % name)
 		portal_viewport = SubViewport.new()
 		portal_viewport.name = self.name + "_SubViewport"
 		portal_viewport.size = get_desired_viewport_size()
@@ -587,6 +599,9 @@ func _setup_cameras() -> void:
 			
 		portal_viewport.add_child(portal_camera, true)
 		portal_camera.global_position = exit_portal.global_position
+		
+		# Connect the viewport to the mesh. Mesh material setup has to run BEFORE this
+		portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
 	else:
 		push_warning("[%s] No exit_portal!" % name)
 
@@ -615,7 +630,8 @@ func _on_teleport_body_exited(body: Node3D) -> void:
 	_erase_tp_metadata(body.get_instance_id())
 
 func _on_window_resize() -> void:
-	portal_viewport.size = get_desired_viewport_size()
+	if portal_viewport:
+		portal_viewport.size = get_desired_viewport_size()
 
 #endregion
 
@@ -685,7 +701,7 @@ func to_exit_direction(real: Vector3) -> Vector3:
 
 
 ## Similar to [method to_exit_transform], but expects a global position.
-func to_exit_position(g_pos:Vector3) -> Vector3:
+func to_exit_position(g_pos: Vector3) -> Vector3:
 	var local: Vector3 = global_transform.affine_inverse() * g_pos
 	local = local.rotated(Vector3.UP, PI)
 	var local_at_exit: Vector3 = exit_portal.global_transform * local
@@ -752,7 +768,7 @@ func check_tp_interaction(flag: int) -> bool:
 ## Get a point where the portal plane intersects a line. Line ends [param start] and [param end] 
 ## are in global coordinates and so is the result. Used for forwarding raycast queries.
 func line_intersection(start: Vector3, end: Vector3) -> Vector3:
-	var plane_normal = -global_basis.z
+	var plane_normal = - global_basis.z
 	var plane_point = global_position
 	
 	var line_dir = end - start
@@ -837,6 +853,8 @@ func _get_property_list() -> Array[Dictionary]:
 		config.append(AtExport.int_flags("teleport_interactions", opts))
 		config.append(AtExport.group_end())
 	
+	config.append(AtExport.group("Advanced"))
+	config.append(AtExport.bool_("start_deactivated"))
 	
 	return config
 
@@ -852,7 +870,8 @@ func _property_can_revert(property: StringName) -> bool:
 		&"rigidbody_boost",
 		&"teleport_collision_mask",
 		&"teleport_tolerance",
-		&"teleport_interactions"
+		&"teleport_interactions",
+		&"start_deactivated",
 	]
 
 func _property_get_revert(property: StringName) -> Variant:
@@ -877,7 +896,8 @@ func _property_get_revert(property: StringName) -> Variant:
 			return 0.5
 		&"teleport_interactions":
 			return TeleportInteractions.CALLBACK | TeleportInteractions.PLAYER_UPRIGHT
-	
+		&"start_deactivated":
+			return false
 	return null
 
 #endregion
