@@ -88,20 +88,21 @@ environment = SubResource("Environment_egr2n")
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
 process_priority = 100
 process_physics_priority = 100
-transform = Transform3D(0.782869, 0, 0.622187, 0, 1, 0, -0.622187, 0, 0.782869, 0.446549, 0.07829, 0.836223)
+transform = Transform3D(0.782869, 0, 0.622187, 0, 1, 0, -0.622187, 0, 0.782869, 0.446549, 0.161443, 0.836223)
 collision_layer = 129
 script = ExtResource("1_q2byl")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
 shape = SubResource("CapsuleShape3D_lgpir")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
 mesh = SubResource("CapsuleMesh_qc8t8")
 
 [node name="PlayerCamera" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
 [node name="Room" type="MeshInstance3D" parent="."]
