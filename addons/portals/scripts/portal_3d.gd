@@ -151,10 +151,23 @@ var viewport_size_mode: PortalViewportSizeMode = PortalViewportSizeMode.FULL:
 var _viewport_size_max_width_absolute: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 var _viewport_size_fractional: float = 0.5
 
-## Expected direction from which you expect the portal to be viewed. Restricting this restricts the
-## way the portal mesh is shifted around when player looks at the portal from different sides. [br]
-## Only really makes sense to restrict for visual-only portals.
-var view_direction: TeleportDirection = TeleportDirection.FRONT_AND_BACK
+
+## Hints the direction from which you expect the portal to be viewed. Makes sense to restrict on
+## one-way portals or visual-only portals (with [member is_teleport] set to [code]false[/code]).
+enum ViewDirection {
+	FRONT_AND_BACK,
+	## Corresponds to portal's FORWARD direction (-Z)
+	ONLY_FRONT,
+	## Corresponds to portal's BACK direction (+Z)
+	ONLY_BACK,
+}
+
+## The direction from which you expect the portal to be viewed. Restricting this restricts the
+## way the portal mesh is shifted around when player looks at the portal from different sides.[br]
+## Restrict this if the portal can be seen from the sides and has no portal frame around it to 
+## cover the shifting mesh.[br][br]
+## Also see [member teleport_direction]
+var view_direction: ViewDirection = ViewDirection.FRONT_AND_BACK
 
 ## If [code]true[/code], the portal is also a teleport.
 ## [br][br]
@@ -350,8 +363,9 @@ func _on_portal_size_changed() -> void:
 		push_error("Failed to update portal size, portal has no mesh")
 		return
 	
-	var p: BoxMesh = portal_mesh.mesh
-	p.size = Vector3(portal_size.x, portal_size.y, _portal_thickness)
+	var p: PortalBoxMesh = portal_mesh.mesh
+	p.size = Vector3(portal_size.x, portal_size.y, 1)
+	portal_mesh.scale.z = _portal_thickness
 	
 	if is_teleport and teleport_collider:
 		var box: BoxShape3D = teleport_collider.shape
@@ -412,24 +426,22 @@ func _process_cameras() -> void:
 		var half_height: float = player_camera.near * tan(deg_to_rad(player_camera.fov * 0.5))
 		var half_width: float = half_height * pv_size.x / float(pv_size.y)
 		var near_diagonal: float = Vector3(half_width, half_height, player_camera.near).length()
-		
-		# TODO: This doesn't change much. Update it directly?
-		_portal_thickness = near_diagonal
-		_on_portal_size_changed()
+		portal_mesh.scale.z = near_diagonal
 		
 		var player_in_front_of_portal: bool = forward_distance(player_camera) > 0
 		var portal_shift: float = 0
 		match view_direction:
-			TeleportDirection.FRONT:
-				portal_shift = 0.5
-			TeleportDirection.BACK:
-				portal_shift = -0.5
-			TeleportDirection.FRONT_AND_BACK:
-				portal_shift = 0.5 if player_in_front_of_portal else -0.5
-			
+			ViewDirection.ONLY_FRONT:
+				portal_shift = 1
+			ViewDirection.ONLY_BACK:
+				portal_shift = -1
+			ViewDirection.FRONT_AND_BACK:
+				portal_shift = 1 if player_in_front_of_portal else -1
+		
 		portal_mesh.position = (
-			Vector3.FORWARD * near_diagonal *  portal_shift
+			Vector3.FORWARD * near_diagonal * portal_shift
 		)
+		portal_mesh.scale.z *= signf(-portal_shift) # Turn the portal towards the player
 
 
 func _process_teleports() -> void:
@@ -529,9 +541,10 @@ func _setup_mesh() -> void:
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mi.layers = portal_render_layer
 	
-	var p := BoxMesh.new()
-	p.size = Vector3(portal_size.x, portal_size.y, _portal_thickness)
+	var p := PortalBoxMesh.new()
+	p.size = Vector3(portal_size.x, portal_size.y, 1)
 	mi.mesh = p
+	mi.scale.z = _portal_thickness
 	
 	add_child_in_editor(self, mi)
 	_portal_mesh_path = get_path_to(mi)
@@ -795,7 +808,7 @@ func _get_property_list() -> Array[Dictionary]:
 	elif viewport_size_mode == PortalViewportSizeMode.FRACTIONAL:
 		config.append(AtExport.float_range("_viewport_size_fractional", 0, 1))
 	
-	config.append(AtExport.enum_("view_direction", &"Portal3D.TeleportDirection", TeleportDirection))
+	config.append(AtExport.enum_("view_direction", &"Portal3D.ViewDirection", ViewDirection))
 	
 	config.append(AtExport.group_end())
 	
@@ -842,7 +855,7 @@ func _property_get_revert(property: StringName) -> Variant:
 		&"_viewport_size_max_width_absolute":
 			return ProjectSettings.get_setting("display/window/size/viewport_width")
 		&"view_direction":
-			return TeleportDirection.FRONT_AND_BACK
+			return ViewDirection.FRONT_AND_BACK
 		&"teleport_direction":
 			return TeleportDirection.FRONT_AND_BACK
 		&"rigidbody_boost":

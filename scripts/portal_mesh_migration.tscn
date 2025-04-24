@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw727pipehonx"]
+
+[sub_resource type="GDScript" id="GDScript_7nky4"]
+resource_name = "PortalMigration"
+script/source = "@tool
+extends Node
+
+@export_tool_button(\"Clear portal meshes\", \"Clear\") var _tb_clear: Callable = clear
+@export_tool_button(\"Recreate meshes\", \"MeshInstance3D\") var _tb_migrate: Callable = migrate
+
+func clear() -> void:
+	for n: Portal3D in get_tree().get_nodes_in_group(\"portals\"):
+		if n.portal_mesh: n.portal_mesh.queue_free()
+		n._portal_mesh_path = ^\"\"
+
+func migrate() -> void:
+	for n: Portal3D in get_tree().get_nodes_in_group(\"portals\"):
+		n._setup_mesh()
+"
+
+[node name="PortalMeshMigration" type="Node"]
+editor_description = "Editor tool. Place into the scene, remove all portal meshes and recreate them. Used only for debugging"
+script = SubResource("GDScript_7nky4")

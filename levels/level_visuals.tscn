@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://ds222tuqqcsfc"]
+[gd_scene load_steps=37 format=4 uid="uid://ds222tuqqcsfc"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_dd4c5"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_0foui"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://bbvyey800ra6l" path="res://assets/prototyping/M_prototype_light.tres" id="4_gwold"]
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="5_i7d02"]
 [ext_resource type="Material" uid="uid://1nvrnylcajfg" path="res://assets/prototyping/M_prototype_red.tres" id="6_1bwv4"]
+[ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="6_j7s2b"]
 [ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://assets/prototyping/prop_cube.tscn" id="7_036eg"]
 [ext_resource type="Script" uid="uid://crsvyf0qu1jsr" path="res://scripts/random_spin.gd" id="8_8yb2m"]
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://assets/prototyping/prop_torus.tscn" id="9_1bwv4"]
@@ -58,31 +59,145 @@ _surfaces = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwtkw"]
 size = Vector3(3, 3, 3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_15hb3"]
-size = Vector3(2.6, 2.6, 0.05)
+[sub_resource type="ArrayMesh" id="ArrayMesh_my3fx"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hjpwt"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xqeyu"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hjk6c"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1gc01"]
 material = ExtResource("6_1bwv4")
 flip_faces = true
 size = Vector3(2.6, 2.6, 2.6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_i7d02"]
-size = Vector3(2.6, 2.6, 0.05)
+[sub_resource type="ArrayMesh" id="ArrayMesh_xfi6y"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8yb2m"]
 material = ExtResource("9_036eg")
 flip_faces = true
 size = Vector3(2.6, 2.6, 2.6)
 
+[sub_resource type="ArrayMesh" id="ArrayMesh_ldlqq"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_cwtkw"]
 material = ExtResource("11_15hb3")
 flip_faces = true
 size = Vector3(2.6, 2.6, 2.6)
 
+[sub_resource type="ArrayMesh" id="ArrayMesh_u0w78"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_j7s2b"]
 material = ExtResource("13_cwtkw")
 flip_faces = true
 size = Vector3(2.6, 2.6, 2.6)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nw007"]
+_surfaces = [{
+"aabb": AABB(-1.3, -1.3, -1, 2.6, 2.6, 1),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAQABAABAAUAAQADAAUABQADAAcAAwACAAcABwACAAYAAgAAAAYABgAAAAQABAAFAAYABgAFAAcAAAABAAIAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("Zmamv2Zmpj8AAAAAZmamP2Zmpj8AAAAAZmamv2Zmpr8AAAAAZmamP2Zmpr8AAAAAZmamv2Zmpj8AAIC/ZmamP2Zmpj8AAIC/Zmamv2Zmpr8AAIC/ZmamP2Zmpr8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
+}]
+script = ExtResource("6_j7s2b")
+size = Vector3(2.6, 2.6, 1)
 
 [node name="Level_Visuals" type="Node3D"]
 
@@ -148,84 +263,88 @@ process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 1.5, 0)
 script = ExtResource("5_i7d02")
-_portal_mesh_path = NodePath("Portal3D_Mesh")
+_portal_mesh_path = NodePath("RedPortal_Mesh")
 portal_size = Vector2(2.6, 2.6)
 exit_portal = NodePath("../VisualRooms/RedRoom/Portal3D")
 portal_frame_width = 0.0
 portal_render_layer = 128
 viewport_size_mode = 0
-view_direction = 0
+view_direction = 1
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="RedPortal"]
+[node name="RedPortal_Mesh" type="MeshInstance3D" parent="RedPortal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_15hb3")
+mesh = SubResource("ArrayMesh_my3fx")
 
 [node name="GreenPortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, -1.5)
 script = ExtResource("5_i7d02")
-_portal_mesh_path = NodePath("Portal3D_Mesh")
+_portal_mesh_path = NodePath("GreenPortal_Mesh")
 portal_size = Vector2(2.6, 2.6)
 exit_portal = NodePath("../VisualRooms/GreenRoom/Portal3D")
 portal_frame_width = 0.0
 portal_render_layer = 128
 viewport_size_mode = 0
-view_direction = 0
+view_direction = 1
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="GreenPortal"]
+[node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_15hb3")
+mesh = SubResource("ArrayMesh_hjpwt")
 
 [node name="BluePortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 1.5, 1.5, 0)
 script = ExtResource("5_i7d02")
-_portal_mesh_path = NodePath("Portal3D_Mesh")
+_portal_mesh_path = NodePath("BluePortal_Mesh")
 portal_size = Vector2(2.6, 2.6)
 exit_portal = NodePath("../VisualRooms/BlueRoom/Portal3D")
 portal_frame_width = 0.0
 portal_render_layer = 128
 viewport_size_mode = 0
-view_direction = 0
+view_direction = 1
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="BluePortal"]
+[node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_15hb3")
+mesh = SubResource("ArrayMesh_xqeyu")
 
 [node name="OrangePortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 1.5, 1.5)
 script = ExtResource("5_i7d02")
-_portal_mesh_path = NodePath("Portal3D_Mesh")
+_portal_mesh_path = NodePath("OrangePortal_Mesh")
 portal_size = Vector2(2.6, 2.6)
 exit_portal = NodePath("../VisualRooms/OrangeRoom/Portal3D")
 portal_frame_width = 0.0
 portal_render_layer = 128
 viewport_size_mode = 0
-view_direction = 0
+view_direction = 1
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="OrangePortal"]
+[node name="OrangePortal_Mesh" type="MeshInstance3D" parent="OrangePortal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_15hb3")
+mesh = SubResource("ArrayMesh_hjk6c")
 
 [node name="VisualRooms" type="Node3D" parent="."]
 
@@ -250,15 +369,16 @@ player_camera = NodePath("../../../Player/PlayerCamera")
 portal_render_layer = 128
 viewport_size_mode = 1
 _viewport_size_max_width_absolute = 32
-view_direction = 2
+view_direction = 0
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/RedRoom/Portal3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_i7d02")
+mesh = SubResource("ArrayMesh_xfi6y")
 
 [node name="GreenRoom" type="MeshInstance3D" parent="VisualRooms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -3.75)
@@ -281,15 +401,16 @@ player_camera = NodePath("../../../Player/PlayerCamera")
 portal_render_layer = 128
 viewport_size_mode = 1
 _viewport_size_max_width_absolute = 32
-view_direction = 2
+view_direction = 0
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/GreenRoom/Portal3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_i7d02")
+mesh = SubResource("ArrayMesh_ldlqq")
 
 [node name="BlueRoom" type="MeshInstance3D" parent="VisualRooms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -7.25)
@@ -309,15 +430,16 @@ player_camera = NodePath("../../../Player/PlayerCamera")
 portal_render_layer = 128
 viewport_size_mode = 1
 _viewport_size_max_width_absolute = 32
-view_direction = 2
+view_direction = 0
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/BlueRoom/Portal3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_i7d02")
+mesh = SubResource("ArrayMesh_u0w78")
 
 [node name="PropPrism" parent="VisualRooms/BlueRoom" instance=ExtResource("12_1gc01")]
 script = ExtResource("8_8yb2m")
@@ -340,15 +462,16 @@ player_camera = NodePath("../../../Player/PlayerCamera")
 portal_render_layer = 128
 viewport_size_mode = 1
 _viewport_size_max_width_absolute = 32
-view_direction = 2
+view_direction = 0
 is_teleport = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/OrangeRoom/Portal3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 cast_shadow = 0
-mesh = SubResource("BoxMesh_i7d02")
+mesh = SubResource("ArrayMesh_nw007")
 
 [node name="PropCylinder" parent="VisualRooms/OrangeRoom" instance=ExtResource("14_k6lcj")]
 script = ExtResource("8_8yb2m")
