@@ -419,9 +419,10 @@ func _process(delta: float) -> void:
 
 func _process_cameras() -> void:
 	if portal_camera != null && player_camera != null && exit_portal != null:
-		# Camera transformations
+		# Update camera
 		portal_camera.global_transform = self.to_exit_transform(player_camera.global_transform)
 		portal_camera.near = _calculate_near_plane()
+		portal_camera.fov = player_camera.fov
 		
 		# Prevent flickering
 		var pv_size: Vector2i = portal_viewport.size
@@ -570,7 +571,7 @@ func _setup_cameras() -> void:
 		adjusted_env.tonemap_mode = Environment.TONE_MAPPER_LINEAR
 		adjusted_env.tonemap_exposure = 1
 		
-		portal_camera = Camera3D.new()
+		portal_camera = player_camera.duplicate(0)
 		portal_camera.name = self.name + "_Camera3D"
 		portal_camera.environment = adjusted_env
 		

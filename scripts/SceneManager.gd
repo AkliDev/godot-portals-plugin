@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 		var screenshots_dir = DirAccess.open("res://screenshots")
 		var index = screenshots_dir.get_files().size()
 		
-		var result = img.save_png("res://screenshots/screenshot_%d_%s.png" % [index, get_tree().current_scene.name.to_snake_case()])
-		print("Screenshot saved: %s" % error_string(result))
+		var filename = "screenshot_%d_%s.png" % [index, get_tree().current_scene.name.to_snake_case()]
+		var result = img.save_png("res://screenshots/" + filename)
+		print("Screenshot saved: %s (%s)" % [error_string(result), filename])
 		
