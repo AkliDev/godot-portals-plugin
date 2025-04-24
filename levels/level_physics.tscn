@@ -208,20 +208,22 @@ shape = SubResource("ConcavePolygonShape3D_7nky4")
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
 process_priority = 100
 process_physics_priority = 100
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448394, 0.875832, 5.91448)
+editor_description = "Another instance where the player camera is at the origin of the player body. The collider and mesh are shifted down."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448394, 1.52899, 5.91448)
 collision_layer = 129
 script = ExtResource("2_l6px6")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
 shape = SubResource("CapsuleShape3D_0cfh8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
 mesh = SubResource("CapsuleMesh_frlfj")
 
 [node name="PlayerCamera" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
 [node name="ProjectileDummy" type="MeshInstance3D" parent="Player/PlayerCamera"]
