@@ -19,20 +19,28 @@ signal on_teleport_receive(node: Node3D)
 ## The portal starts rendering again, [member portal_mesh] becomes visible and teleport
 ## activates (if the portal is teleporting).
 func activate() -> void:
-	portal_viewport.disable_3d = false
-	portal_mesh.show()
+	process_mode = Node.PROCESS_MODE_INHERIT
 	
-	if is_teleport:
-		teleport_area.monitoring = true
+	if portal_viewport == null:
+		_setup_cameras()
+		portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
+	
+	show()
+	
 
 ## Disables rendering, teleportation and hides the portal mesh. Does NOT clean up the
 ## internal viewport.
-func deactivate() -> void:
-	portal_viewport.disable_3d = true
-	portal_mesh.hide()
+func deactivate(destroy_viewports: bool = false) -> void:
+	hide()
+	_watchlist_teleportables.clear()
 	
-	if is_teleport:
-		teleport_area.monitoring = false
+	if destroy_viewports:
+		if portal_viewport:
+			portal_viewport.queue_free()
+			portal_viewport = null
+			portal_camera = null
+	
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 ## If your [RayCast3D] node hits a portal that it was meant to go through, pass it to this function
 ## and it will get you the next collider behind the portal.
@@ -131,8 +139,7 @@ var portal_render_layer: int = 1 << 7:
 
 ## The portal camera sets its [member Camera3D.near] as close to the portal as possible, to 
 ## hopefully cull objects close behind the portal. This value offsets the [member portal_camera]'s 
-## near clip plane. Might be useful, if the portal has a thick frame around it. [br][br] 
-## Recommended value: 0
+## near clip plane. Might be useful, if the portal has a thick frame around it.
 var portal_frame_width: float = 0
 
 ## Determines how big the internal portal viewports are. It helps to reduce the memory usage
@@ -829,6 +836,7 @@ func _get_property_list() -> Array[Dictionary]:
 		var opts: Array = TeleportInteractions.keys().map(func(s): return s.capitalize())
 		config.append(AtExport.int_flags("teleport_interactions", opts))
 		config.append(AtExport.group_end())
+	
 	
 	return config
 

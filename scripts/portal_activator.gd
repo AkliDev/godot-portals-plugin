@@ -21,7 +21,7 @@ func _on_body_exited(body: Node3D) -> void:
 	prints("[%s]" % name, "%s exited" % body.name, "to the", "left" if left else "right")
 	if left:
 		portal_left.activate()
-		portal_right.deactivate()
+		portal_right.deactivate(true)
 	else:
-		portal_left.deactivate()
+		portal_left.deactivate(true)
 		portal_right.activate()
