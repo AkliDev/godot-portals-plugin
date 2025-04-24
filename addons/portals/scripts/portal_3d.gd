@@ -110,11 +110,6 @@ var _tb_sync_portal_sizes: Callable = _editor_sync_portal_sizes.bind()
 ## [SubViewport]s.
 var player_camera: Camera3D
 
-## If there is a frame mesh around the portal, the [member portal_camera] clipping on the other
-## side might be visible. The [code]portal_frame_width[/code] is subtracted from the near clip 
-## plane distance to offset this.
-var portal_frame_width: float = 0
-
 ## @deprecated
 ## Indicates whether you can see a portal through another portal. This does [b]not[/b]
 ## automatically lead to recursive portals.
@@ -132,6 +127,13 @@ var portal_render_layer: int = 1 << 7:
 		portal_render_layer = v
 		if caused_by_user_interaction():
 			portal_mesh.layers = v
+
+
+## The portal camera sets its [member Camera3D.near] as close to the portal as possible, to 
+## hopefully cull objects close behind the portal. This value offsets the [member portal_camera]'s 
+## near clip plane. Might be useful, if the portal has a thick frame around it. [br][br] 
+## Recommended value: 0
+var portal_frame_width: float = 0
 
 ## Determines how big the internal portal viewports are. It helps to reduce the memory usage
 ## by not rendering the portals at full resolution. Viewports are resized on window resize.
@@ -796,9 +798,9 @@ func _get_property_list() -> Array[Dictionary]:
 	
 	
 	config.append(AtExport.group("Rendering"))
-	config.append(AtExport.float_range("portal_frame_width", 0.0, 10.0, 0.01))
 	config.append(AtExport.node("player_camera", "Camera3D"))
-	config.append(AtExport.int_render_3d("portal_render_layer")) # TODO: Rename to `portal_layer`
+	config.append(AtExport.int_render_3d("portal_render_layer"))
+	config.append(AtExport.float_range("portal_frame_width", 0.0, 10.0, 0.01))
 	
 	config.append(AtExport.enum_(
 		"viewport_size_mode", &"Portal3D.PortalViewportSizeMode", PortalViewportSizeMode))
@@ -832,9 +834,9 @@ func _get_property_list() -> Array[Dictionary]:
 func _property_can_revert(property: StringName) -> bool:
 	return property in [
 		&"portal_size",
-		&"portal_frame_width",
 		&"player_camera",
 		&"portal_render_layer",
+		&"portal_frame_width",
 		&"_viewport_size_max_width_absolute",
 		&"view_direction",
 		&"teleport_direction",
@@ -848,10 +850,10 @@ func _property_get_revert(property: StringName) -> Variant:
 	match property:
 		&"portal_size":
 			return Vector2(2, 2.5)
-		&"portal_frame_width":
-			return 0.0
 		&"portal_render_layer":
 			return PortalSettings.get_setting("default_portal_layer")
+		&"portal_frame_width":
+			return 0.0
 		&"_viewport_size_max_width_absolute":
 			return ProjectSettings.get_setting("display/window/size/viewport_width")
 		&"view_direction":

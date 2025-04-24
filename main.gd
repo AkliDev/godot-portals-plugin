@@ -14,7 +14,10 @@ func _ready() -> void:
 			
 			var b = Button.new()
 			b.text = file.replace(".tscn", "").capitalize()
-			b.pressed.connect(func(): get_tree().change_scene_to_file(levels_directory + "/" + file))
+			b.pressed.connect(func(): 
+				print("[Level] " + b.text)
+				get_tree().change_scene_to_file(levels_directory + "/" + file)
+			)
 			levels_container.add_child(b)
 
 
