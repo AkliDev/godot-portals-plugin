@@ -1,5 +1,9 @@
 class_name PortalSettings
 
+## Static helper class for portal project settings.
+##
+## Features helper methods for inserting addon-related settings into [ProjectSettings].
+## Used mainly in plugin initialization and for getting defaults in [Portal3D]
 
 static func _qual_name(setting: String) -> String:
 	return "addons/portals/" + setting
@@ -17,7 +21,7 @@ static func init_setting(setting: String,
 	ProjectSettings.set_restart_if_changed(setting, requires_restart)
 
 
-## See companion class [AtExport], it has some utilities which might be helpful!
+## See companion class [class AtExport], it has some utilities which might be helpful!
 static func add_info(config: Dictionary) -> void:
 	var qual_name = _qual_name(config["name"])
 	

@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-
 @export var camera: Camera3D
 
 @export var SPEED = 4.0

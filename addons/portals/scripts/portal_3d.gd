@@ -293,9 +293,12 @@ var teleport_collider: CollisionShape3D:
 	set(v): assert(false, "Proxy variable, use '_teleport_collider_path' instead")
 
 
-## Camera that looks through the exit portal and renders to [member portal_viewport]
+## Camera that looks through the exit portal and renders to [member portal_viewport]. 
+## Created in [code]_ready[/code]
 var portal_camera: Camera3D = null
-## Viewport that supplies the albedo texture to portal mesh. Rendered by [member portal_camera]
+
+## Viewport that supplies the albedo texture to portal mesh. Rendered by [member portal_camera].
+## Created in [code]_ready[/code]
 var portal_viewport: SubViewport = null
 
 ## Metadata kept about the teleportable objects watched by the portal.
@@ -703,8 +706,8 @@ func to_exit_direction(real: Vector3) -> Vector3:
 ## Similar to [method to_exit_transform], but expects a global position.
 func to_exit_position(g_pos: Vector3) -> Vector3:
 	var local: Vector3 = global_transform.affine_inverse() * g_pos
-	local = local.rotated(Vector3.UP, PI)
-	var local_at_exit: Vector3 = exit_portal.global_transform * local
+	var rotated = local.rotated(Vector3.UP, PI)
+	var local_at_exit: Vector3 = exit_portal.global_transform * rotated
 	return local_at_exit
 
 
