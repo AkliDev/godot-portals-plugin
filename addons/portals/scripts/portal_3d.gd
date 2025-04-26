@@ -242,7 +242,8 @@ const ON_TELEPORT_CALLBACK_METHOD: StringName = &"on_teleport"
 
 ## This method will be called on a node that will get into close proximity of a portal that has 
 ## [member TeleportInteractions.DUPLICATE_MESHES] turned on. The method is expected to return an
-## array of [MeshInstance3D]s.
+## array of [MeshInstance3D]s. These meshes will be duplicated to achieve a smooth teleportation 
+## effect. If some mesh instance is a child node of another mesh instance, provide just the parent.
 const DUPLICATE_MESHES_METHOD: StringName = &"get_teleportable_meshes"
 
 ## When a [CollisionObject3D] should be teleported, the portal check for a [NodePath] for an 
@@ -657,12 +658,18 @@ func _construct_tp_metadata(node: Node3D) -> void:
 	_watchlist_teleportables.set(node.get_instance_id(), meta)
 
 func _erase_tp_metadata(node_id: int) -> void:
+	var meta = _watchlist_teleportables.get(node_id)
+	if meta != null:
+		meta = meta as TeleportableMeta
+		for m in meta.meshes: disable_mesh_clipping(m)
+		for c in meta.mesh_clones: c.queue_free()
+		
 	_watchlist_teleportables.erase(node_id)
 
 func enable_mesh_clipping(mi: MeshInstance3D, portal: Portal3D) -> void:
 	mi.set_instance_shader_parameter("portal_clip_active", true)
 	mi.set_instance_shader_parameter("portal_clip_point", portal.global_position)
-	mi.set_instance_shader_parameter("portal_clip_normal", portal.global_basis.z)
+	mi.set_instance_shader_parameter("portal_clip_normal", sign(portal.forward_distance(mi)) * portal.global_basis.z)
 
 func disable_mesh_clipping(mi: MeshInstance3D) -> void:
 	mi.set_instance_shader_parameter("portal_clip_active", false)
@@ -682,7 +689,8 @@ func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
 	for m in tp_meta.mesh_clones: enable_mesh_clipping(m, self) # switch
 	
 	exit_portal._watchlist_teleportables.set(body_id, tp_meta)
-	_erase_tp_metadata(body_id)
+	# NOTE: Not using '_erase_tp_metadata' here, as it also frees the nodes!
+	_watchlist_teleportables.erase(body_id)
 
 ## [b]Crucial[/b] piece of a portal - transforming where objects should appear 
 ## on the other side. Used for both cameras and teleports.
