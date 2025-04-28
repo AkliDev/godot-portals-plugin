@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
 				var p = c.get_parent()
 				if p is Portal3D:
 					print("Forwarding raycast...")
-					c = p.forward_raycast(self)
+					c = p.forward_raycast(self).get(&"collider", null)
 				
 				if c:
 					prints("Raycast hit:", c.name)

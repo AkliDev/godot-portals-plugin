@@ -50,7 +50,7 @@ func deactivate(destroy_viewports: bool = false) -> void:
 ## and it will get you the next collider behind the portal.
 ## Uses [method PhysicsDirectSpaceState3D.intersect_ray] under the hood.[br][br]
 ## Also see [method forward_raycast_query].
-func forward_raycast(raycast: RayCast3D) -> CollisionObject3D:
+func forward_raycast(raycast: RayCast3D) -> Dictionary:
 	var start := to_exit_position(raycast.get_collision_point())
 	var goal := to_exit_position(raycast.to_global(raycast.target_position))
 	
@@ -64,9 +64,8 @@ func forward_raycast(raycast: RayCast3D) -> CollisionObject3D:
 	query.collide_with_bodies = raycast.collide_with_bodies
 	query.hit_back_faces = raycast.hit_back_faces
 	query.hit_from_inside = raycast.hit_from_inside
-	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	
-	return result.get("collider", null)
+	return get_world_3d().direct_space_state.intersect_ray(query)
 
 ## When doing raycasts with [method PhysicsDirectSpaceState3D.intersect_ray] and you hit a portal
 ## that you want to go through, pass the existing [PhysicsRayQueryParameters3D] to this function.
