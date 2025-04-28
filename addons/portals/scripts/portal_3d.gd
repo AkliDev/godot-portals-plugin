@@ -438,34 +438,44 @@ func _process(delta: float) -> void:
 	
 
 func _process_cameras() -> void:
-	if portal_camera != null && player_camera != null && exit_portal != null:
-		# Update camera
-		portal_camera.global_transform = self.to_exit_transform(player_camera.global_transform)
-		portal_camera.near = _calculate_near_plane()
-		portal_camera.fov = player_camera.fov
-		
-		# Prevent flickering
-		var pv_size: Vector2i = portal_viewport.size
-		var half_height: float = player_camera.near * tan(deg_to_rad(player_camera.fov * 0.5))
-		var half_width: float = half_height * pv_size.x / float(pv_size.y)
-		var near_diagonal: float = Vector3(half_width, half_height, player_camera.near).length()
-		portal_mesh.scale.z = near_diagonal
-		
-		var player_in_front_of_portal: bool = forward_distance(player_camera) > 0
-		var portal_shift: float = 0
-		match view_direction:
-			ViewDirection.ONLY_FRONT:
-				portal_shift = 1
-			ViewDirection.ONLY_BACK:
-				portal_shift = -1
-			ViewDirection.FRONT_AND_BACK:
-				portal_shift = 1 if player_in_front_of_portal else -1
-		
-		portal_mesh.position = (
-			Vector3.FORWARD * near_diagonal * portal_shift
-		)
-		portal_mesh.scale.z *= signf(-portal_shift) # Turn the portal towards the player
-
+	
+	if portal_camera == null:
+		push_error("%s: No portal camera" % name)
+		return
+	if player_camera == null:
+		push_error("%s: No player camera" % name)
+		return
+	if exit_portal == null:
+		push_error("%s: No exit portal" % name)
+		return
+	
+	# Update camera
+	portal_camera.global_transform = self.to_exit_transform(player_camera.global_transform)
+	portal_camera.near = _calculate_near_plane()
+	portal_camera.fov = player_camera.fov
+	
+	# Prevent flickering
+	var pv_size: Vector2i = portal_viewport.size
+	var half_height: float = player_camera.near * tan(deg_to_rad(player_camera.fov * 0.5))
+	var half_width: float = half_height * pv_size.x / float(pv_size.y)
+	var near_diagonal: float = Vector3(half_width, half_height, player_camera.near).length()
+	portal_mesh.scale.z = near_diagonal
+	
+	var player_in_front_of_portal: bool = forward_distance(player_camera) > 0
+	var portal_shift: float = 0
+	match view_direction:
+		ViewDirection.ONLY_FRONT:
+			portal_shift = 1
+		ViewDirection.ONLY_BACK:
+			portal_shift = -1
+		ViewDirection.FRONT_AND_BACK:
+			portal_shift = 1 if player_in_front_of_portal else -1
+	
+	portal_mesh.position = (
+		Vector3.FORWARD * near_diagonal * portal_shift
+	)
+	portal_mesh.scale.z *= signf(-portal_shift) # Turn the portal towards the player
+	
 
 func _process_teleports() -> void:
 	for body_id: int in _watchlist_teleportables.keys():
@@ -605,7 +615,7 @@ func _setup_cameras() -> void:
 		# Connect the viewport to the mesh. Mesh material setup has to run BEFORE this
 		portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
 	else:
-		push_warning("[%s] No exit_portal!" % name)
+		push_error("%s has no exit_portal! Failed to setup cameras." % name)
 
 #endregion
 
