@@ -220,7 +220,7 @@ var teleport_tolerance: float = 0.5
 
 ## Flags for everything that happens when a something is teleported.
 enum TeleportInteractions {
-	## The portal will try to call [constant ON_TELEPORT_CALLBACK_METHOD] method on the teleported
+	## The portal will try to call [constant ON_TELEPORT_CALLBACK] method on the teleported
 	## node. You need to implement this function with a script.
 	CALLBACK = 1 << 0,
 	## When the player is teleported, his X and Z rotations are tweened to zero. Resets unwanted
@@ -228,7 +228,7 @@ enum TeleportInteractions {
 	PLAYER_UPRIGHT = 1 << 1,
 	## Duplicate meshes present on the teleported object, resulting in a [i]smooth teleport[/i] 
 	## from a 3rd point of view. [br]
-	## This option is quite involved, requires a method named [constant DUPLICATE_MESHES_METHOD] 
+	## This option is quite involved, requires a method named [constant DUPLICATE_MESHES_CALLBACK] 
 	## implemented on the teleported body, which returns an array of mesh instances that should be 
 	## duplicated. Every one of those meshes also needs to implement a special shader to clip it 
 	## along the portal plane.
@@ -237,12 +237,12 @@ enum TeleportInteractions {
 
 ## This method will be called on a teleported node if [member TeleportInteractions.CALLBACK]
 ## is checked in [member teleport_interactions]
-const ON_TELEPORT_CALLBACK_METHOD: StringName = &"on_teleport"
+const ON_TELEPORT_CALLBACK: StringName = &"on_teleport"
 
 ## This method will be called on a node that will get into close proximity of a portal that has 
 ## [member TeleportInteractions.DUPLICATE_MESHES] turned on. The method is expected to return an
 ## array of [MeshInstance3D]s.
-const DUPLICATE_MESHES_METHOD: StringName = &"get_teleportable_meshes"
+const DUPLICATE_MESHES_CALLBACK: StringName = &"get_teleportable_meshes"
 
 ## When a [CollisionObject3D] should be teleported, the portal check for a [NodePath] for an 
 ## alternative node to teleport. For example it's useful when the [Area3D] that's triggering the 
@@ -305,7 +305,7 @@ class TeleportableMeta:
 	## Forward distance from the portal
 	var forward: float = 0
 	## Meshes that the object gave for duplication. Retrieved by the 
-	## [constant Portal3D.DUPLICATE_MESHES_METHOD] callback.
+	## [constant Portal3D.DUPLICATE_MESHES_CALLBACK] callback.
 	var meshes: Array[MeshInstance3D] = []
 	## Cloned [member Portal3D.TeleportableMeta.meshes] with [method Node.duplicate]
 	var mesh_clones: Array[MeshInstance3D] = []
@@ -517,8 +517,8 @@ func _process_teleports() -> void:
 				get_tree().create_tween().tween_property(teleportable, "rotation:z", 0, 0.3)
 			
 			if check_tp_interaction(TeleportInteractions.CALLBACK):
-				if teleportable.has_method(ON_TELEPORT_CALLBACK_METHOD):
-					teleportable.call(ON_TELEPORT_CALLBACK_METHOD, self)
+				if teleportable.has_method(ON_TELEPORT_CALLBACK):
+					teleportable.call(ON_TELEPORT_CALLBACK, self)
 			
 			# transfer the thing to exit portal
 			_transfer_tp_metadata_to_exit(body)
@@ -644,8 +644,8 @@ func _construct_tp_metadata(node: Node3D) -> void:
 	meta.forward = forward_distance(node)
 	
 	if check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES) and \
-		node.has_method(DUPLICATE_MESHES_METHOD):
-		meta.meshes = node.call(DUPLICATE_MESHES_METHOD)
+		node.has_method(DUPLICATE_MESHES_CALLBACK):
+		meta.meshes = node.call(DUPLICATE_MESHES_CALLBACK)
 		for m in meta.meshes:
 			enable_mesh_clipping(m, self)
 			var dupe = m.duplicate(0)
