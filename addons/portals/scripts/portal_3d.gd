@@ -133,7 +133,7 @@ const portals_see_portals: bool = false
 ## [member VisualInstance3D.layers] settging for [member portal_mesh]. So that the portal cameras
 ## don't see other portals.[br][br]
 ## You can set the default in [i]Project settings > Addons > Portals[/i].
-var portal_render_layer: int = 1 << 7:
+var portal_render_layer: int = 1 << 19:
 	set(v):
 		portal_render_layer = v
 		if caused_by_user_interaction():
@@ -212,7 +212,7 @@ var teleport_direction: TeleportDirection = TeleportDirection.FRONT_AND_BACK
 var rigidbody_boost: float = 0.0
 
 ## [CollisionObject3D]s detected by this mask will be registered by the portal and teleported. 
-var teleport_collision_mask: int = 1 << 7
+var teleport_collision_mask: int = 1 << 15
 
 ## When teleporting, the portal checks if the teleported object is less than [b]this[/b] near.
 ## Prevents false negatives when multiple portals are on top of each other.
@@ -881,7 +881,7 @@ func _property_get_revert(property: StringName) -> Variant:
 		&"portal_size":
 			return Vector2(2, 2.5)
 		&"portal_render_layer":
-			return PortalSettings.get_setting("default_portal_layer")
+			return 1 << 19
 		&"portal_frame_width":
 			return 0.0
 		&"_viewport_size_max_width_absolute":
@@ -893,7 +893,7 @@ func _property_get_revert(property: StringName) -> Variant:
 		&"rigidbody_boost":
 			return 0.0
 		&"teleport_collision_mask":
-			return PortalSettings.get_setting("default_teleport_mask")
+			return 1 << 15
 		&"teleport_tolerance":
 			return 0.5
 		&"teleport_interactions":

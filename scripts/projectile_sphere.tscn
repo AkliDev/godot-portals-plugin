@@ -27,7 +27,7 @@ shape = SubResource("SphereShape3D_frlfj")
 [node name="TeleportingArea" type="Area3D" parent="."]
 editor_description = "The entire point of this node is to use the `teleport_root` metadata somewhere. The simpler solution in this case would be to switch the root body to layer 8, so that it would get teleported automatically.
 But this is another way too."
-collision_layer = 128
+collision_layer = 32768
 collision_mask = 0
 monitoring = false
 metadata/teleport_root = NodePath("..")
