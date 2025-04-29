@@ -8,11 +8,6 @@ const ForwardDirGizmo = preload("uid://cacoywhcpn4ja") # gizmos/portal_forward_d
 var forward_dir_gizmo
 
 func _enter_tree() -> void:
-	PortalSettings.init_setting("default_portal_layer", 1 << 7)
-	PortalSettings.add_info(AtExport.int_render_3d("default_portal_layer"))
-	
-	PortalSettings.init_setting("default_teleport_mask", 1 << 7)
-	PortalSettings.add_info(AtExport.int_physics_3d("default_teleport_mask"))
 	
 	PortalSettings.init_setting("gizmo_exit_outline_active", true, true)
 	PortalSettings.add_info(AtExport.bool_("gizmo_exit_outline_active"))

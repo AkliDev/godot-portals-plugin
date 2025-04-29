@@ -19,7 +19,7 @@ static func init_setting(setting: String,
 	
 	ProjectSettings.set_initial_value(setting, default_value)
 	ProjectSettings.set_restart_if_changed(setting, requires_restart)
-
+	ProjectSettings.set_as_basic(setting, true)
 
 ## See companion class [class AtExport], it has some utilities which might be helpful!
 static func add_info(config: Dictionary) -> void:

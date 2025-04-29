@@ -50,7 +50,7 @@ func deactivate(destroy_viewports: bool = false) -> void:
 ## and it will get you the next collider behind the portal.
 ## Uses [method PhysicsDirectSpaceState3D.intersect_ray] under the hood.[br][br]
 ## Also see [method forward_raycast_query].
-func forward_raycast(raycast: RayCast3D) -> CollisionObject3D:
+func forward_raycast(raycast: RayCast3D) -> Dictionary:
 	var start := to_exit_position(raycast.get_collision_point())
 	var goal := to_exit_position(raycast.to_global(raycast.target_position))
 	
@@ -64,9 +64,8 @@ func forward_raycast(raycast: RayCast3D) -> CollisionObject3D:
 	query.collide_with_bodies = raycast.collide_with_bodies
 	query.hit_back_faces = raycast.hit_back_faces
 	query.hit_from_inside = raycast.hit_from_inside
-	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	
-	return result.get("collider", null)
+	return get_world_3d().direct_space_state.intersect_ray(query)
 
 ## When doing raycasts with [method PhysicsDirectSpaceState3D.intersect_ray] and you hit a portal
 ## that you want to go through, pass the existing [PhysicsRayQueryParameters3D] to this function.
@@ -134,7 +133,7 @@ const portals_see_portals: bool = false
 ## [member VisualInstance3D.layers] settging for [member portal_mesh]. So that the portal cameras
 ## don't see other portals.[br][br]
 ## You can set the default in [i]Project settings > Addons > Portals[/i].
-var portal_render_layer: int = 1 << 7:
+var portal_render_layer: int = 1 << 19:
 	set(v):
 		portal_render_layer = v
 		if caused_by_user_interaction():
@@ -213,7 +212,7 @@ var teleport_direction: TeleportDirection = TeleportDirection.FRONT_AND_BACK
 var rigidbody_boost: float = 0.0
 
 ## [CollisionObject3D]s detected by this mask will be registered by the portal and teleported. 
-var teleport_collision_mask: int = 1 << 7
+var teleport_collision_mask: int = 1 << 15
 
 ## When teleporting, the portal checks if the teleported object is less than [b]this[/b] near.
 ## Prevents false negatives when multiple portals are on top of each other.
@@ -221,7 +220,7 @@ var teleport_tolerance: float = 0.5
 
 ## Flags for everything that happens when a something is teleported.
 enum TeleportInteractions {
-	## The portal will try to call [constant ON_TELEPORT_CALLBACK_METHOD] method on the teleported
+	## The portal will try to call [constant ON_TELEPORT_CALLBACK] method on the teleported
 	## node. You need to implement this function with a script.
 	CALLBACK = 1 << 0,
 	## When the player is teleported, his X and Z rotations are tweened to zero. Resets unwanted
@@ -229,7 +228,7 @@ enum TeleportInteractions {
 	PLAYER_UPRIGHT = 1 << 1,
 	## Duplicate meshes present on the teleported object, resulting in a [i]smooth teleport[/i] 
 	## from a 3rd point of view. [br]
-	## This option is quite involved, requires a method named [constant DUPLICATE_MESHES_METHOD] 
+	## This option is quite involved, requires a method named [constant DUPLICATE_MESHES_CALLBACK] 
 	## implemented on the teleported body, which returns an array of mesh instances that should be 
 	## duplicated. Every one of those meshes also needs to implement a special shader to clip it 
 	## along the portal plane.
@@ -238,13 +237,12 @@ enum TeleportInteractions {
 
 ## This method will be called on a teleported node if [member TeleportInteractions.CALLBACK]
 ## is checked in [member teleport_interactions]
-const ON_TELEPORT_CALLBACK_METHOD: StringName = &"on_teleport"
+const ON_TELEPORT_CALLBACK: StringName = &"on_teleport"
 
 ## This method will be called on a node that will get into close proximity of a portal that has 
 ## [member TeleportInteractions.DUPLICATE_MESHES] turned on. The method is expected to return an
-## array of [MeshInstance3D]s. These meshes will be duplicated to achieve a smooth teleportation 
-## effect. If some mesh instance is a child node of another mesh instance, provide just the parent.
-const DUPLICATE_MESHES_METHOD: StringName = &"get_teleportable_meshes"
+## array of [MeshInstance3D]s.
+const DUPLICATE_MESHES_CALLBACK: StringName = &"get_teleportable_meshes"
 
 ## When a [CollisionObject3D] should be teleported, the portal check for a [NodePath] for an 
 ## alternative node to teleport. For example it's useful when the [Area3D] that's triggering the 
@@ -307,7 +305,7 @@ class TeleportableMeta:
 	## Forward distance from the portal
 	var forward: float = 0
 	## Meshes that the object gave for duplication. Retrieved by the 
-	## [constant Portal3D.DUPLICATE_MESHES_METHOD] callback.
+	## [constant Portal3D.DUPLICATE_MESHES_CALLBACK] callback.
 	var meshes: Array[MeshInstance3D] = []
 	## Cloned [member Portal3D.TeleportableMeta.meshes] with [method Node.duplicate]
 	var mesh_clones: Array[MeshInstance3D] = []
@@ -440,34 +438,44 @@ func _process(delta: float) -> void:
 	
 
 func _process_cameras() -> void:
-	if portal_camera != null && player_camera != null && exit_portal != null:
-		# Update camera
-		portal_camera.global_transform = self.to_exit_transform(player_camera.global_transform)
-		portal_camera.near = _calculate_near_plane()
-		portal_camera.fov = player_camera.fov
-		
-		# Prevent flickering
-		var pv_size: Vector2i = portal_viewport.size
-		var half_height: float = player_camera.near * tan(deg_to_rad(player_camera.fov * 0.5))
-		var half_width: float = half_height * pv_size.x / float(pv_size.y)
-		var near_diagonal: float = Vector3(half_width, half_height, player_camera.near).length()
-		portal_mesh.scale.z = near_diagonal
-		
-		var player_in_front_of_portal: bool = forward_distance(player_camera) > 0
-		var portal_shift: float = 0
-		match view_direction:
-			ViewDirection.ONLY_FRONT:
-				portal_shift = 1
-			ViewDirection.ONLY_BACK:
-				portal_shift = -1
-			ViewDirection.FRONT_AND_BACK:
-				portal_shift = 1 if player_in_front_of_portal else -1
-		
-		portal_mesh.position = (
-			Vector3.FORWARD * near_diagonal * portal_shift
-		)
-		portal_mesh.scale.z *= signf(-portal_shift) # Turn the portal towards the player
-
+	
+	if portal_camera == null:
+		push_error("%s: No portal camera" % name)
+		return
+	if player_camera == null:
+		push_error("%s: No player camera" % name)
+		return
+	if exit_portal == null:
+		push_error("%s: No exit portal" % name)
+		return
+	
+	# Update camera
+	portal_camera.global_transform = self.to_exit_transform(player_camera.global_transform)
+	portal_camera.near = _calculate_near_plane()
+	portal_camera.fov = player_camera.fov
+	
+	# Prevent flickering
+	var pv_size: Vector2i = portal_viewport.size
+	var half_height: float = player_camera.near * tan(deg_to_rad(player_camera.fov * 0.5))
+	var half_width: float = half_height * pv_size.x / float(pv_size.y)
+	var near_diagonal: float = Vector3(half_width, half_height, player_camera.near).length()
+	portal_mesh.scale.z = near_diagonal
+	
+	var player_in_front_of_portal: bool = forward_distance(player_camera) > 0
+	var portal_shift: float = 0
+	match view_direction:
+		ViewDirection.ONLY_FRONT:
+			portal_shift = 1
+		ViewDirection.ONLY_BACK:
+			portal_shift = -1
+		ViewDirection.FRONT_AND_BACK:
+			portal_shift = 1 if player_in_front_of_portal else -1
+	
+	portal_mesh.position = (
+		Vector3.FORWARD * near_diagonal * portal_shift
+	)
+	portal_mesh.scale.z *= signf(-portal_shift) # Turn the portal towards the player
+	
 
 func _process_teleports() -> void:
 	for body_id: int in _watchlist_teleportables.keys():
@@ -519,8 +527,8 @@ func _process_teleports() -> void:
 				get_tree().create_tween().tween_property(teleportable, "rotation:z", 0, 0.3)
 			
 			if check_tp_interaction(TeleportInteractions.CALLBACK):
-				if teleportable.has_method(ON_TELEPORT_CALLBACK_METHOD):
-					teleportable.call(ON_TELEPORT_CALLBACK_METHOD, self)
+				if teleportable.has_method(ON_TELEPORT_CALLBACK):
+					teleportable.call(ON_TELEPORT_CALLBACK, self)
 			
 			# transfer the thing to exit portal
 			_transfer_tp_metadata_to_exit(body)
@@ -607,7 +615,7 @@ func _setup_cameras() -> void:
 		# Connect the viewport to the mesh. Mesh material setup has to run BEFORE this
 		portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
 	else:
-		push_warning("[%s] No exit_portal!" % name)
+		push_error("%s has no exit_portal! Failed to setup cameras." % name)
 
 #endregion
 
@@ -646,8 +654,8 @@ func _construct_tp_metadata(node: Node3D) -> void:
 	meta.forward = forward_distance(node)
 	
 	if check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES) and \
-		node.has_method(DUPLICATE_MESHES_METHOD):
-		meta.meshes = node.call(DUPLICATE_MESHES_METHOD)
+		node.has_method(DUPLICATE_MESHES_CALLBACK):
+		meta.meshes = node.call(DUPLICATE_MESHES_CALLBACK)
 		for m in meta.meshes:
 			enable_mesh_clipping(m, self)
 			var dupe = m.duplicate(0)
@@ -890,7 +898,7 @@ func _property_get_revert(property: StringName) -> Variant:
 		&"portal_size":
 			return Vector2(2, 2.5)
 		&"portal_render_layer":
-			return PortalSettings.get_setting("default_portal_layer")
+			return 1 << 19
 		&"portal_frame_width":
 			return 0.0
 		&"_viewport_size_max_width_absolute":
@@ -902,7 +910,7 @@ func _property_get_revert(property: StringName) -> Variant:
 		&"rigidbody_boost":
 			return 0.0
 		&"teleport_collision_mask":
-			return PortalSettings.get_setting("default_teleport_mask")
+			return 1 << 15
 		&"teleport_tolerance":
 			return 0.5
 		&"teleport_interactions":

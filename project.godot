@@ -56,7 +56,7 @@ take_screenshot={
 [layer_names]
 
 3d_physics/layer_1="World"
-3d_physics/layer_8="Teleports"
+3d_physics/layer_16="Teleports"
 
 [physics]
 

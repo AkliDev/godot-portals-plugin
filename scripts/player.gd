@@ -10,7 +10,7 @@ func _ready() -> void:
 	assert(camera != null, "Forgot to set camera in editor")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-## Implements [member Portal3D.ON_TELEPORT_CALLBACK_METHOD]
+## Implements [member Portal3D.ON_TELEPORT_CALLBACK]
 func on_teleport(portal: Portal3D) -> void:
 	pass
 
@@ -22,9 +22,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _physics_process(delta: float) -> void:
-	
-	var right:Vector3 = (global_transform.basis.x * Vector3(1, 0, 1)).normalized()
-	var forward:Vector3 = (-global_transform.basis.z * Vector3(1, 0, 1)).normalized()
+	var right: Vector3 = (global_transform.basis.x * Vector3(1, 0, 1)).normalized()
+	var forward: Vector3 = (-global_transform.basis.z * Vector3(1, 0, 1)).normalized()
 	var has_input = false
 
 	velocity.x = 0

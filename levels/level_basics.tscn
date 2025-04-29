@@ -329,7 +329,7 @@ skeleton = NodePath("../..")
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448394, 0.875832, 4.08334)
-collision_layer = 129
+collision_layer = 32769
 script = ExtResource("3_lff3k")
 camera = NodePath("Node3D/PlayerCamera")
 metadata/_edit_group_ = true
@@ -347,8 +347,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
 [node name="UnstoppableSphere" type="Area3D" parent="."]
+collision_layer = 32769
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12711, 1.25, -5.43866)
-collision_layer = 129
 collision_mask = 0
 monitoring = false
 script = SubResource("GDScript_8wh7v")
@@ -378,7 +378,7 @@ view_direction = 0
 is_teleport = true
 teleport_direction = 2
 rigidbody_boost = 0.0
-teleport_collision_mask = 128
+teleport_collision_mask = 32768
 teleport_tolerance = 0.5
 teleport_interactions = 7
 start_deactivated = false
@@ -413,7 +413,7 @@ view_direction = 0
 is_teleport = true
 teleport_direction = 2
 rigidbody_boost = 0.0
-teleport_collision_mask = 128
+teleport_collision_mask = 32768
 teleport_tolerance = 0.5
 teleport_interactions = 7
 start_deactivated = false

@@ -113,7 +113,7 @@ view_direction = 0
 is_teleport = true
 teleport_direction = 2
 rigidbody_boost = 0.0
-teleport_collision_mask = 128
+teleport_collision_mask = 32768
 teleport_tolerance = 0.5
 teleport_interactions = 3
 start_deactivated = false
@@ -175,7 +175,7 @@ current = true
 
 [node name="TeleportTrigger" type="Area3D" parent="Player/PlayerCamera"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
-collision_layer = 128
+collision_layer = 32768
 collision_mask = 0
 metadata/teleport_root = NodePath("../..")
 

@@ -109,7 +109,7 @@ environment = SubResource("Environment_dqevk")
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448394, 0.875832, 5.91448)
-collision_layer = 129
+collision_layer = 32769
 script = ExtResource("4_nrnmy")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
@@ -187,14 +187,14 @@ _teleport_area_path = NodePath("TeleportArea")
 _teleport_collider_path = NodePath("TeleportArea/Collider")
 portal_size = Vector2(5, 3)
 exit_portal = NodePath("../BluePortal")
-portal_render_layer = 128
+portal_render_layer = 524288
 portal_frame_width = 0.0
 viewport_size_mode = 0
 view_direction = 0
 is_teleport = true
 teleport_direction = 2
 rigidbody_boost = 0.0
-teleport_collision_mask = 128
+teleport_collision_mask = 32768
 teleport_tolerance = 0.5
 teleport_interactions = 3
 start_deactivated = false
@@ -208,7 +208,7 @@ shape = SubResource("BoxShape3D_wviww")
 
 [node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
-layers = 128
+layers = 524288
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_7bsmn")
 
@@ -222,14 +222,14 @@ _teleport_area_path = NodePath("TeleportArea")
 _teleport_collider_path = NodePath("TeleportArea/Collider")
 portal_size = Vector2(5, 3)
 exit_portal = NodePath("../GreenPortal")
-portal_render_layer = 128
+portal_render_layer = 524288
 portal_frame_width = 0.0
 viewport_size_mode = 0
 view_direction = 0
 is_teleport = true
 teleport_direction = 2
 rigidbody_boost = 0.0
-teleport_collision_mask = 128
+teleport_collision_mask = 32768
 teleport_tolerance = 0.5
 teleport_interactions = 3
 start_deactivated = false
@@ -243,7 +243,7 @@ shape = SubResource("BoxShape3D_dqevk")
 
 [node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
-layers = 128
+layers = 524288
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_76ped")
 
