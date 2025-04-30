@@ -535,7 +535,9 @@ func _process_teleports() -> void:
 		else:
 			tp_meta.forward = current_fw_angle
 			for i in tp_meta.mesh_clones.size():
-				tp_meta.mesh_clones[i].global_transform = to_exit_transform(tp_meta.meshes[i].global_transform)
+				var mesh = tp_meta.meshes[i]
+				var clone = tp_meta.mesh_clones[i]
+				clone.global_transform = to_exit_transform(mesh.global_transform)
 
 func _calculate_near_plane() -> float:
 	# Adjustment for cube portals. This AABB is basically a plane.
@@ -588,7 +590,6 @@ func _setup_cameras() -> void:
 	assert(portal_viewport == null)
 	
 	if exit_portal != null:
-		print("[%s] creation viewport" % name)
 		portal_viewport = SubViewport.new()
 		portal_viewport.name = self.name + "_SubViewport"
 		portal_viewport.size = get_desired_viewport_size()
@@ -656,12 +657,13 @@ func _construct_tp_metadata(node: Node3D) -> void:
 	if check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES) and \
 		node.has_method(DUPLICATE_MESHES_CALLBACK):
 		meta.meshes = node.call(DUPLICATE_MESHES_CALLBACK)
-		for m in meta.meshes:
-			enable_mesh_clipping(m, self)
+		for m: MeshInstance3D in meta.meshes:
 			var dupe = m.duplicate(0)
+			dupe.name = m.name + "_Clone"
 			meta.mesh_clones.append(dupe)
-			self.add_child(dupe)
-			enable_mesh_clipping(dupe, exit_portal)
+			self.add_child(dupe, true)
+		
+		enable_mesh_clipping(meta, self)
 	
 	_watchlist_teleportables.set(node.get_instance_id(), meta)
 
@@ -674,10 +676,19 @@ func _erase_tp_metadata(node_id: int) -> void:
 		
 	_watchlist_teleportables.erase(node_id)
 
-func enable_mesh_clipping(mi: MeshInstance3D, portal: Portal3D) -> void:
-	mi.set_instance_shader_parameter("portal_clip_active", true)
-	mi.set_instance_shader_parameter("portal_clip_point", portal.global_position)
-	mi.set_instance_shader_parameter("portal_clip_normal", sign(portal.forward_distance(mi)) * portal.global_basis.z)
+func enable_mesh_clipping(meta: TeleportableMeta, along_portal: Portal3D) -> void:
+	for mi: MeshInstance3D in meta.meshes:
+		var clip_normal = signf(meta.forward) * along_portal.global_basis.z
+		mi.set_instance_shader_parameter("portal_clip_active", true)
+		mi.set_instance_shader_parameter("portal_clip_point", along_portal.global_position)
+		mi.set_instance_shader_parameter("portal_clip_normal", clip_normal)
+	
+	var exit = along_portal.exit_portal
+	for clone: MeshInstance3D in meta.mesh_clones:
+		var clip_normal = signf(meta.forward) * exit.global_basis.z
+		clone.set_instance_shader_parameter("portal_clip_active", true)
+		clone.set_instance_shader_parameter("portal_clip_point", exit.global_position)
+		clone.set_instance_shader_parameter("portal_clip_normal", clip_normal)
 
 func disable_mesh_clipping(mi: MeshInstance3D) -> void:
 	mi.set_instance_shader_parameter("portal_clip_active", false)
@@ -693,11 +704,10 @@ func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
 		return
 	
 	tp_meta.forward = exit_portal.forward_distance(for_body)
-	for m in tp_meta.meshes: enable_mesh_clipping(m, exit_portal) # switch
-	for m in tp_meta.mesh_clones: enable_mesh_clipping(m, self) # switch
+	enable_mesh_clipping(tp_meta, exit_portal) # Switch, the main mesh is clipped by exit portal!
 	
 	exit_portal._watchlist_teleportables.set(body_id, tp_meta)
-	# NOTE: Not using '_erase_tp_metadata' here, as it also frees the nodes!
+	# NOTE: Not using '_erase_tp_metadata' here, as it also frees the cloned meshes!
 	_watchlist_teleportables.erase(body_id)
 
 ## [b]Crucial[/b] piece of a portal - transforming where objects should appear 
@@ -832,7 +842,8 @@ func _get_property_list() -> Array[Dictionary]:
 	config.append(AtExport.vector2("portal_size"))
 	
 	if exit_portal != null and not portal_size.is_equal_approx(exit_portal.portal_size):
-		config.append(AtExport.button("_tb_sync_portal_sizes", "Take Exit Portal's Size", "Vector2"))
+		config.append(
+			AtExport.button("_tb_sync_portal_sizes", "Take Exit Portal's Size", "Vector2"))
 	
 	config.append(AtExport.node("exit_portal", "Portal3D"))
 	

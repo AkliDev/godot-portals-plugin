@@ -347,8 +347,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
 [node name="UnstoppableSphere" type="Area3D" parent="."]
-collision_layer = 32769
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12711, 1.25, -5.43866)
+collision_layer = 32769
 collision_mask = 0
 monitoring = false
 script = SubResource("GDScript_8wh7v")
