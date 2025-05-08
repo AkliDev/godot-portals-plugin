@@ -462,10 +462,7 @@ func _process_cameras() -> void:
 		ViewDirection.FRONT_AND_BACK:
 			portal_shift = 1 if player_in_front_of_portal else -1
 	
-	portal_mesh.position = (
-		Vector3.FORWARD * near_diagonal * portal_shift
-	)
-	portal_mesh.scale.z *= signf(-portal_shift) # Turn the portal towards the player
+	portal_mesh.scale.z *= signf(portal_shift) # Turn the portal towards the player
 	
 
 func _process_teleports() -> void:
