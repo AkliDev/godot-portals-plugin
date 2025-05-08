@@ -121,15 +121,6 @@ var _tb_sync_portal_sizes: Callable = _editor_sync_portal_sizes.bind()
 ## [SubViewport]s.
 var player_camera: Camera3D
 
-## @deprecated
-## Indicates whether you can see a portal through another portal. This does [b]not[/b]
-## automatically lead to recursive portals.
-## [br]
-## Changed to constant, because with [BoxMesh] portals (current implementation) it doesn't make 
-## sense. The portals need to be see-through from behind, such as with [PlaneMesh], which also
-## restricts teleporting options.
-const portals_see_portals: bool = false
-
 ## [member VisualInstance3D.layers] settging for [member portal_mesh]. So that the portal cameras
 ## don't see other portals.[br][br]
 ## You can set the default in [i]Project settings > Addons > Portals[/i].
@@ -607,9 +598,9 @@ func _setup_cameras() -> void:
 		portal_camera.name = self.name + "_Camera3D"
 		portal_camera.environment = adjusted_env
 		
-		if portals_see_portals == false:
-			portal_camera.cull_mask = portal_camera.cull_mask ^ portal_render_layer
-			
+		# Ensure that portals don't see other portals.
+		portal_camera.cull_mask = portal_camera.cull_mask ^ portal_render_layer
+		
 		portal_viewport.add_child(portal_camera, true)
 		portal_camera.global_position = exit_portal.global_position
 		
