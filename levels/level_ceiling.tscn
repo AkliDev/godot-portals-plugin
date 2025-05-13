@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://coqloab7xvqmb"]
+[gd_scene load_steps=20 format=4 uid="uid://coqloab7xvqmb"]
 
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="1_q2byl"]
 [ext_resource type="Texture2D" uid="uid://ccft22qceqgic" path="res://assets/skybox.exr" id="2_lgpir"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="3_qc8t8"]
 [ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://assets/prototyping/prop_cube.tscn" id="5_brya7"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="5_cxhee"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="5_s2ils"]
 [ext_resource type="PackedScene" uid="uid://ciuwt2yj4hcu2" path="res://assets/prototyping/prop_prism.tscn" id="6_ptqrv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qc8t8"]
@@ -47,7 +48,7 @@ data = PackedVector3Array(2.75, -1.5, -2.25, -0.5, -1.25, -2.25, -1.5, -1.25, -2
 [sub_resource type="BoxShape3D" id="BoxShape3D_qc8t8"]
 size = Vector3(0.999, 1.999, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_58a7l"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_v4788"]
 _surfaces = [{
 "aabb": AABB(-0.4995, -0.9995, -1, 0.999, 1.999, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -65,7 +66,7 @@ size = Vector3(0.999, 1.999, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ptqrv"]
 size = Vector3(0.999, 1.999, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_s2ils"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_do3pq"]
 _surfaces = [{
 "aabb": AABB(-0.4995, -0.9995, -1, 0.999, 1.999, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -147,8 +148,9 @@ shape = SubResource("BoxShape3D_qc8t8")
 [node name="DoorPortal_Mesh" type="MeshInstance3D" parent="DoorPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("5_s2ils")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_58a7l")
+mesh = SubResource("ArrayMesh_v4788")
 
 [node name="CeilingPortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
@@ -182,8 +184,9 @@ shape = SubResource("BoxShape3D_ptqrv")
 [node name="CeilingPortal_Mesh" type="MeshInstance3D" parent="CeilingPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("5_s2ils")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_s2ils")
+mesh = SubResource("ArrayMesh_do3pq")
 
 [node name="PropCube" parent="." instance=ExtResource("5_brya7")]
 transform = Transform3D(0.347786, 0, -0.528227, 0, 0.632439, 0, 0.528227, 0, 0.347786, 1.78507, -0.93378, 0.85859)

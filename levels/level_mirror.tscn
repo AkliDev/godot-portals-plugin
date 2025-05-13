@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=4 uid="uid://ce6hkiqlckosx"]
+[gd_scene load_steps=21 format=4 uid="uid://ce6hkiqlckosx"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_qdlns"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_0i67i"]
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="3_0i67i"]
 [ext_resource type="Material" uid="uid://7to3kb1tisdd" path="res://assets/prototyping/M_prototype_orange.tres" id="3_5ve6n"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="5_aq3vv"]
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://assets/prototyping/prop_torus.tscn" id="5_ghw8g"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="5_t7po1"]
 
@@ -54,7 +55,10 @@ height = 0.8
 [sub_resource type="BoxMesh" id="BoxMesh_8bheg"]
 material = ExtResource("3_5ve6n")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_aq3vv"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7po1"]
+size = Vector3(2, 2.5, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gje6b"]
 _surfaces = [{
 "aabb": AABB(-1, -1.25, -1, 2, 2.5, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -67,9 +71,6 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AACAvwAAoD8AAAAAAACAPwAAoD8AAAAAAACAvwAAoL8AAAAAAACAPwAAoL8AAAAAAACAvwAAoD8AAIC/AACAPwAAoD8AAIC/AACAvwAAoL8AAIC/AACAPwAAoL8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
 }]
 script = ExtResource("5_t7po1")
-size = Vector3(2, 2.5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_t7po1"]
 size = Vector3(2, 2.5, 1)
 
 [node name="LevelMirror" type="Node3D"]
@@ -163,16 +164,17 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
-layers = 128
-cast_shadow = 0
-mesh = SubResource("ArrayMesh_aq3vv")
-
 [node name="TeleportArea" type="Area3D" parent="Portal3D"]
 
 [node name="Collider" type="CollisionShape3D" parent="Portal3D/TeleportArea"]
 shape = SubResource("BoxShape3D_t7po1")
+
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
+layers = 128
+material_override = ExtResource("5_aq3vv")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_gje6b")
 
 [node name="PropTorus" parent="." instance=ExtResource("5_ghw8g")]
 transform = Transform3D(0.965926, -0.258819, -1.13133e-08, 0, -4.37114e-08, 1, -0.258819, -0.965926, -4.2222e-08, 4.25, 1, 5.5)

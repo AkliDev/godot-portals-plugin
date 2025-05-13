@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://cceqtevdskikh"]
+[gd_scene load_steps=33 format=4 uid="uid://cceqtevdskikh"]
 
 [ext_resource type="Script" uid="uid://dh2f564q4c8g1" path="res://levels/level_around.gd" id="1_u0pli"]
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="2_0dr2q"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="8_eqmv0"]
 [ext_resource type="Script" uid="uid://dlyt0lmvey7ua" path="res://scripts/portal_activator.gd" id="9_0dr2q"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="9_0qp41"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="9_qq1gc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lff3k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -456,6 +457,7 @@ shape = SubResource("BoxShape3D_0dr2q")
 [node name="Portal_AC_Mesh" type="MeshInstance3D" parent="Portal_AC"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_8qtme")
 
@@ -491,6 +493,7 @@ shape = SubResource("BoxShape3D_0dr2q")
 [node name="Portal_AB_Mesh" type="MeshInstance3D" parent="Portal_AB"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ohal2")
 
@@ -526,6 +529,7 @@ shape = SubResource("BoxShape3D_0qp41")
 [node name="Portal_BC_Mesh" type="MeshInstance3D" parent="Portal_BC"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_tt16h")
 
@@ -561,6 +565,7 @@ shape = SubResource("BoxShape3D_0qp41")
 [node name="Portal_BA_Mesh" type="MeshInstance3D" parent="Portal_BA"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_eqmv0")
 
@@ -596,6 +601,7 @@ shape = SubResource("BoxShape3D_0qp41")
 [node name="Portal_CA_Mesh" type="MeshInstance3D" parent="Portal_CA"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_0r3se")
 
@@ -631,6 +637,7 @@ shape = SubResource("BoxShape3D_0qp41")
 [node name="Portal_CB_Mesh" type="MeshInstance3D" parent="Portal_CB"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_j105o")
 

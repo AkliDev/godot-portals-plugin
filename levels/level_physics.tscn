@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dllqiht0np5i8"]
+[gd_scene load_steps=32 format=4 uid="uid://dllqiht0np5i8"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_xh7pd"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_l6px6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cdr0bql7jj43n" path="res://scripts/projectile_sphere.tscn" id="5_m81n0"]
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="6_qn875"]
 [ext_resource type="Material" uid="uid://brj2jayoo0l0d" path="res://assets/prototyping/M_prototype_blue.tres" id="8_flk5l"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="9_7nky4"]
 [ext_resource type="Material" uid="uid://1nvrnylcajfg" path="res://assets/prototyping/M_prototype_red.tres" id="9_ejw2f"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="10_7nky4"]
 [ext_resource type="PackedScene" uid="uid://bb1b3cg0khq5k" path="res://scripts/poor_mans_crosshair.tscn" id="10_ejw2f"]
@@ -90,7 +91,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("zcysv83MrL/NzMy9AACgvwAAoL/NzMy9zcysv83MrD/NzMy9zcysv83MrL/NzMw9zcysv83MrL/NzMy9zcysv83MrD/NzMy9AACgvwAAoL/NzMy9zcysv83MrL/NzMy9AACgPwAAoL/NzMy9zcysv83MrL/NzMw9zcysP83MrL/NzMy9zcysv83MrL/NzMy9zcysv83MrL/NzMw9AACgvwAAoD/NzMw9AACgvwAAoL/NzMw9AACgvwAAoL/NzMw9zcysP83MrL/NzMw9zcysv83MrL/NzMw9zcysv83MrD/NzMy9AACgvwAAoL/NzMy9AACgvwAAoD/NzMy9AACgvwAAoD/NzMy9zcysP83MrD/NzMy9zcysv83MrD/NzMy9zcysv83MrD/NzMy9zcysv83MrD/NzMw9zcysv83MrL/NzMw9zcysv83MrD/NzMw9AACgvwAAoD/NzMw9zcysv83MrL/NzMw9zcysv83MrD/NzMy9zcysP83MrD/NzMw9zcysv83MrD/NzMw9AACgvwAAoD/NzMw9zcysv83MrD/NzMw9AACgPwAAoD/NzMw9AACgPwAAoL/NzMy9zcysv83MrL/NzMy9zcysP83MrL/NzMy9zcysP83MrL/NzMy9AACgPwAAoD/NzMy9AACgPwAAoL/NzMy9zcysv83MrL/NzMw9zcysP83MrL/NzMw9zcysP83MrL/NzMy9AACgPwAAoL/NzMw9zcysP83MrL/NzMw9AACgvwAAoL/NzMw9zcysP83MrL/NzMw9zcysP83MrD/NzMw9zcysP83MrL/NzMy9zcysP83MrL/NzMw9AACgPwAAoL/NzMw9zcysP83MrD/NzMw9AACgPwAAoD/NzMy9zcysP83MrD/NzMy9AACgvwAAoD/NzMy9zcysP83MrD/NzMy9zcysP83MrD/NzMw9zcysv83MrD/NzMy9zcysP83MrD/NzMy9AACgPwAAoD/NzMy9zcysP83MrL/NzMy9zcysP83MrD/NzMw9zcysP83MrD/NzMy9zcysP83MrL/NzMy9AACgPwAAoD/NzMw9zcysv83MrD/NzMw9zcysP83MrD/NzMw9zcysP83MrD/NzMw9AACgPwAAoL/NzMw9AACgPwAAoD/NzMw9AACgvwAAoL/NzMw9AACgvwAAoL/NzMy9AACgPwAAoL/NzMy9AACgvwAAoL/NzMy9AACgvwAAoL/NzMw9AACgvwAAoD/NzMw9AACgvwAAoL/NzMy9AACgvwAAoD/NzMw9AACgvwAAoD/NzMy9AACgvwAAoD/NzMy9AACgvwAAoD/NzMw9AACgPwAAoD/NzMw9AACgPwAAoD/NzMy9AACgPwAAoL/NzMw9AACgPwAAoL/NzMy9AACgPwAAoL/NzMy9AACgPwAAoL/NzMw9AACgvwAAoL/NzMw9AACgPwAAoD/NzMw9AACgPwAAoD/NzMy9AACgvwAAoD/NzMy9AACgPwAAoD/NzMy9AACgPwAAoD/NzMw9AACgPwAAoL/NzMw9/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//////wAA/z//////AAD/P/////8AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////////f/////////9/////////////f/9/AID///9//38AgP///3//fwCA////f/9/AID///9//38AgP///3//fwCA/38AAP//////fwAA//////9/AAD/////AAD/f/9/AIAAAP9//38AgAAA/3//fwCA/3//////////f/////////9//////////38AAP//////fwAA//////9/AAD/////AAD/f/9/AIAAAP9//38AgAAA/3//fwCA")
 }]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ejw2f"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8emm5"]
 _surfaces = [{
 "aabb": AABB(-1.25, -1.25, -1, 2.5, 2.5, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -108,7 +109,7 @@ size = Vector3(2.5, 2.5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ejw2f"]
 size = Vector3(2.5, 2.5, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7nky4"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wkxyb"]
 _surfaces = [{
 "aabb": AABB(-1.25, -1.25, -1, 2.5, 2.5, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -126,7 +127,7 @@ size = Vector3(2.5, 2.5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3l8fs"]
 size = Vector3(2.5, 2.5, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8emm5"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_mrgyd"]
 _surfaces = [{
 "aabb": AABB(-1.25, -1.25, -1, 2.5, 2.5, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -144,7 +145,7 @@ size = Vector3(2.5, 2.5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8emm5"]
 size = Vector3(2.5, 2.5, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_wkxyb"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uwjj5"]
 _surfaces = [{
 "aabb": AABB(-1.25, -1.25, -1, 2.5, 2.5, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -281,8 +282,9 @@ skeleton = NodePath("../..")
 [node name="BluePortal_1_Mesh" type="MeshInstance3D" parent="BluePortal_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_7nky4")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_ejw2f")
+mesh = SubResource("ArrayMesh_8emm5")
 
 [node name="BluePortal_2" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
@@ -322,8 +324,9 @@ skeleton = NodePath("../..")
 [node name="BluePortal_2_Mesh" type="MeshInstance3D" parent="BluePortal_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_7nky4")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_7nky4")
+mesh = SubResource("ArrayMesh_wkxyb")
 
 [node name="RedPortal_1" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
@@ -364,8 +367,9 @@ shape = SubResource("BoxShape3D_3l8fs")
 [node name="RedPortal_1_Mesh" type="MeshInstance3D" parent="RedPortal_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_7nky4")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_8emm5")
+mesh = SubResource("ArrayMesh_mrgyd")
 
 [node name="RedPortal_2" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
@@ -406,5 +410,6 @@ shape = SubResource("BoxShape3D_8emm5")
 [node name="RedPortal_2_Mesh" type="MeshInstance3D" parent="RedPortal_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("9_7nky4")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_wkxyb")
+mesh = SubResource("ArrayMesh_uwjj5")

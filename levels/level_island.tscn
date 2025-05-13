@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=4 uid="uid://dxe2g23t2qp0j"]
+[gd_scene load_steps=18 format=4 uid="uid://dxe2g23t2qp0j"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_amkmy"]
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://assets/prototyping/prop_torus.tscn" id="2_kiw5m"]
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="3_q16ke"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="4_h8f6p"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="4_igb2k"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="4_lgfis"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kiw5m"]
@@ -30,7 +31,7 @@ points = PackedVector3Array(-4, -0.5, -4, -4, 0.5, -4, 4, -0.5, -4, -4, -0.5, 4,
 [sub_resource type="BoxShape3D" id="BoxShape3D_q16ke"]
 size = Vector3(16, 16, 6)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_drgh1"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_iv7mm"]
 _surfaces = [{
 "aabb": AABB(-8, -8, -1, 16, 16, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -45,7 +46,7 @@ _surfaces = [{
 script = ExtResource("4_lgfis")
 size = Vector3(16, 16, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_iv7mm"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_3ddc0"]
 _surfaces = [{
 "aabb": AABB(-8, -8, -1, 16, 16, 1),
 "attribute_data": PackedByteArray("AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPw=="),
@@ -128,8 +129,9 @@ shape = SubResource("BoxShape3D_q16ke")
 [node name="BottomPortal_Mesh" type="MeshInstance3D" parent="BottomPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("4_igb2k")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_drgh1")
+mesh = SubResource("ArrayMesh_iv7mm")
 
 [node name="SkyPortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
@@ -152,8 +154,9 @@ metadata/_edit_group_ = true
 [node name="SkyPortal_Mesh" type="MeshInstance3D" parent="SkyPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("4_igb2k")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_iv7mm")
+mesh = SubResource("ArrayMesh_3ddc0")
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
 process_priority = 100

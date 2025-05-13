@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://ds222tuqqcsfc"]
+[gd_scene load_steps=38 format=4 uid="uid://ds222tuqqcsfc"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_dd4c5"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_0foui"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://bbvyey800ra6l" path="res://assets/prototyping/M_prototype_light.tres" id="4_gwold"]
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="5_i7d02"]
 [ext_resource type="Material" uid="uid://1nvrnylcajfg" path="res://assets/prototyping/M_prototype_red.tres" id="6_1bwv4"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="6_22aq8"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="6_j7s2b"]
 [ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://assets/prototyping/prop_cube.tscn" id="7_036eg"]
 [ext_resource type="Script" uid="uid://crsvyf0qu1jsr" path="res://scripts/random_spin.gd" id="8_8yb2m"]
@@ -278,6 +279,7 @@ metadata/_edit_group_ = true
 [node name="RedPortal_Mesh" type="MeshInstance3D" parent="RedPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_my3fx")
 
@@ -301,6 +303,7 @@ metadata/_edit_group_ = true
 [node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_hjpwt")
 
@@ -324,6 +327,7 @@ metadata/_edit_group_ = true
 [node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xqeyu")
 
@@ -347,6 +351,7 @@ metadata/_edit_group_ = true
 [node name="OrangePortal_Mesh" type="MeshInstance3D" parent="OrangePortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_hjk6c")
 
@@ -381,6 +386,7 @@ metadata/_edit_group_ = true
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/RedRoom/Portal3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xfi6y")
 
@@ -413,6 +419,7 @@ metadata/_edit_group_ = true
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/GreenRoom/Portal3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ldlqq")
 
@@ -442,6 +449,7 @@ metadata/_edit_group_ = true
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/BlueRoom/Portal3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_u0w78")
 
@@ -474,6 +482,7 @@ metadata/_edit_group_ = true
 [node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/OrangeRoom/Portal3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_nw007")
 

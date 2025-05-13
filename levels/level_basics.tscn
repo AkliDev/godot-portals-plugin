@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://5vo86e4fice3"]
+[gd_scene load_steps=30 format=4 uid="uid://5vo86e4fice3"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_uy66w"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="3_lff3k"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://assets/prototyping/prop_torus.tscn" id="6_p3b8s"]
 [ext_resource type="Texture2D" uid="uid://dj7d77ksm7a6t" path="res://assets/prototyping/prototype_blue.png" id="7_8wh7v"]
 [ext_resource type="Script" uid="uid://cw1r4c1d7beyv" path="res://addons/portals/scripts/portal_3d.gd" id="8_8wh7v"]
+[ext_resource type="Material" uid="uid://dcfkcyddxkglf" path="res://addons/portals/materials/editor-preview-portal-material.tres" id="8_eavfu"]
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="8_lbpks"]
 
 [sub_resource type="GDScript" id="GDScript_lbpks"]
@@ -393,6 +394,7 @@ shape = SubResource("BoxShape3D_8wh7v")
 [node name="CubePortal_Mesh" type="MeshInstance3D" parent="CubePortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("8_eavfu")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_im07u")
 
@@ -428,5 +430,6 @@ shape = SubResource("BoxShape3D_lbpks")
 [node name="SpherePortal_Mesh" type="MeshInstance3D" parent="SpherePortal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
+material_override = ExtResource("8_eavfu")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_fneyn")
