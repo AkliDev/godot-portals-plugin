@@ -126,6 +126,9 @@ const ON_TELEPORT_CALLBACK: StringName = &"on_teleport"
 ## func get_teleportable_meshes() -> Array[MeshInstance3D]:
 ##     return [character_mesh]
 ## [/codeblock]
+##
+## The returned meshes require a special material. Check out the plugin's README for more 
+## information!
 const DUPLICATE_MESHES_CALLBACK: StringName = &"get_teleportable_meshes"
 
 ## By default, object triggering the teleport gets teleported. You can override this with a 
