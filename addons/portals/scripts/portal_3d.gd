@@ -4,8 +4,22 @@ class_name Portal3D extends Node3D
 
 ## Seamless 3D portal
 ##
-## This node is a tool script that provides configuration options for portal setup. The portal
-## can be visual-only or also teleporting.
+## To get started, create two Portal3D instances and set their [member exit_portal] to each other.
+## This creates a linked portal pair that you can look through. Make your player to collide with
+## [member teleport_collision_mask] and you will be able to walk back and forth through the portal.
+## [br][br]
+## To integrate portals into your game, you can make use of the [signal on_teleport] and 
+## [signal on_teleport_receive] signals. You can link a portal a different one by chaning its 
+## [member exit_portal] during gameplay. The next level is to make use of the portal's callbacks,
+## mainly the [member ON_TELEPORT_CALLBACK]. If you need to raycast through a portal, then the 
+## [method forward_raycast] method might come in handy! When it comes to optimization, you can use
+## the [method activate] and [method deactivate] methods to control which portals are consuming 
+## resources.
+## [br][br]
+## [b]TIP:[/b] If you change the default value of some property, it will not get synchronized into existing 
+## portal instances due to how Godot handles custom inspectors. For easier defaults management, 
+## I recommend creating a scene with Portal3D as a root and re-using that.
+
 
 #region Public API
 
@@ -132,7 +146,7 @@ const TELEPORT_ROOT_META: StringName = &"teleport_root"
 var portal_size: Vector2 = Vector2(2.0, 2.5):
 	set(v):
 		portal_size = v
-		if caused_by_user_interaction():
+		if _caused_by_user_interaction():
 			_on_portal_size_changed()
 			update_configuration_warnings()
 			if exit_portal:
@@ -177,7 +191,7 @@ enum PortalViewportSizeMode {
 	FRACTIONAL
 }
 
-## Size mode to use for the portal viewport size.
+## Size mode to use for the portal viewport size. Only set this via the inspector.
 var viewport_size_mode: PortalViewportSizeMode = PortalViewportSizeMode.FULL:
 	set(v):
 		viewport_size_mode = v
@@ -211,7 +225,7 @@ var view_direction: ViewDirection = ViewDirection.FRONT_AND_BACK
 var portal_render_layer: int = 1 << 19:
 	set(v):
 		portal_render_layer = v
-		if caused_by_user_interaction():
+		if _caused_by_user_interaction():
 			portal_mesh.layers = v
 
 ## If [code]true[/code], the portal is also a teleport. If [code]false[/code], the portal is 
@@ -222,7 +236,7 @@ var portal_render_layer: int = 1 << 19:
 var is_teleport: bool = true:
 	set(v):
 		is_teleport = v
-		if caused_by_user_interaction():
+		if _caused_by_user_interaction():
 			_setup_teleport()
 			notify_property_list_changed()
 
@@ -286,7 +300,7 @@ var start_deactivated: bool = false
 @export_storage var _portal_thickness: float = 0.05:
 	set(v):
 		_portal_thickness = v
-		if caused_by_user_interaction(): _on_portal_size_changed()
+		if _caused_by_user_interaction(): _on_portal_size_changed()
 
 @export_storage var _portal_mesh_path: NodePath
 ## Mesh used to visualize the portal surface. Created when the portal is added to the scene 
@@ -340,7 +354,7 @@ var _watchlist_teleportables: Dictionary[int, TeleportableMeta] = {}
 
 #endregion
 
-#region Editor Configuration Stuff
+#region Editor Configuration
 
 const _PORTAL_SHADER: Shader = preload("uid://bhdb2skdxehes")
 const _EDITOR_PREVIEW_PORTAL_MATERIAL: StandardMaterial3D = preload("uid://dcfkcyddxkglf")
@@ -356,7 +370,7 @@ func _editor_ready() -> void:
 	_setup_mesh()
 	_setup_teleport()
 	
-	self.group_node(self)
+	self._group_node(self)
 
 func _notification(what: int) -> void:
 	match what:
@@ -390,7 +404,7 @@ func _setup_teleport():
 	var area = Area3D.new()
 	area.name = "TeleportArea"
 	
-	add_child_in_editor(self, area)
+	_add_child_in_editor(self, area)
 	_teleport_area_path = get_path_to(area)
 	
 	var collider = CollisionShape3D.new()
@@ -400,7 +414,7 @@ func _setup_teleport():
 	box.size.y = portal_size.y
 	collider.shape = box
 	
-	add_child_in_editor(teleport_area, collider)
+	_add_child_in_editor(teleport_area, collider)
 	_teleport_collider_path = get_path_to(collider)
 
 
@@ -420,7 +434,7 @@ func _on_portal_size_changed() -> void:
 	
 #endregion
 
-#region GAMEPLAY RUNTIME STUFF
+#region GAMEPLAY LOGIC
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -542,11 +556,11 @@ func _process_teleports() -> void:
 				exit_portal._process_cameras()
 			
 			# Resolve teleport interactions
-			if was_player and check_tp_interaction(TeleportInteractions.PLAYER_UPRIGHT):
+			if was_player and _check_tp_interaction(TeleportInteractions.PLAYER_UPRIGHT):
 				get_tree().create_tween().tween_property(teleportable, "rotation:x", 0, 0.3)
 				get_tree().create_tween().tween_property(teleportable, "rotation:z", 0, 0.3)
 			
-			if check_tp_interaction(TeleportInteractions.CALLBACK):
+			if _check_tp_interaction(TeleportInteractions.CALLBACK):
 				if teleportable.has_method(ON_TELEPORT_CALLBACK):
 					teleportable.call(ON_TELEPORT_CALLBACK, self)
 			
@@ -604,7 +618,7 @@ func _setup_mesh() -> void:
 	# Editor-only material. Will be replaced when game starts.
 	mi.material_override = _EDITOR_PREVIEW_PORTAL_MATERIAL
 	
-	add_child_in_editor(self, mi)
+	_add_child_in_editor(self, mi)
 	_portal_mesh_path = get_path_to(mi)
 
 func _setup_cameras() -> void:
@@ -615,7 +629,7 @@ func _setup_cameras() -> void:
 	if exit_portal != null:
 		portal_viewport = SubViewport.new()
 		portal_viewport.name = self.name + "_SubViewport"
-		portal_viewport.size = get_desired_viewport_size()
+		portal_viewport.size = _calculate_viewport_size()
 		self.add_child(portal_viewport, true)
 		
 		# Disable tonemapping on portal cameras
@@ -667,7 +681,7 @@ func _on_teleport_body_exited(body: Node3D) -> void:
 
 func _on_window_resize() -> void:
 	if portal_viewport:
-		portal_viewport.size = get_desired_viewport_size()
+		portal_viewport.size = _calculate_viewport_size()
 
 #endregion
 
@@ -677,7 +691,7 @@ func _construct_tp_metadata(node: Node3D) -> void:
 	var meta = TeleportableMeta.new()
 	meta.forward = forward_distance(node)
 	
-	if check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES) and \
+	if _check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES) and \
 		node.has_method(DUPLICATE_MESHES_CALLBACK):
 		meta.meshes = node.call(DUPLICATE_MESHES_CALLBACK)
 		for m: MeshInstance3D in meta.meshes:
@@ -686,7 +700,7 @@ func _construct_tp_metadata(node: Node3D) -> void:
 			meta.mesh_clones.append(dupe)
 			self.add_child(dupe, true)
 		
-		enable_mesh_clipping(meta, self)
+		_enable_mesh_clipping(meta, self)
 	
 	_watchlist_teleportables.set(node.get_instance_id(), meta)
 
@@ -694,12 +708,12 @@ func _erase_tp_metadata(node_id: int) -> void:
 	var meta = _watchlist_teleportables.get(node_id)
 	if meta != null:
 		meta = meta as TeleportableMeta
-		for m in meta.meshes: disable_mesh_clipping(m)
+		for m in meta.meshes: _disable_mesh_clipping(m)
 		for c in meta.mesh_clones: c.queue_free()
 		
 	_watchlist_teleportables.erase(node_id)
 
-func enable_mesh_clipping(meta: TeleportableMeta, along_portal: Portal3D) -> void:
+func _enable_mesh_clipping(meta: TeleportableMeta, along_portal: Portal3D) -> void:
 	for mi: MeshInstance3D in meta.meshes:
 		var clip_normal = signf(meta.forward) * along_portal.global_basis.z
 		mi.set_instance_shader_parameter("portal_clip_active", true)
@@ -713,7 +727,7 @@ func enable_mesh_clipping(meta: TeleportableMeta, along_portal: Portal3D) -> voi
 		clone.set_instance_shader_parameter("portal_clip_point", exit.global_position)
 		clone.set_instance_shader_parameter("portal_clip_normal", clip_normal)
 
-func disable_mesh_clipping(mi: MeshInstance3D) -> void:
+func _disable_mesh_clipping(mi: MeshInstance3D) -> void:
 	mi.set_instance_shader_parameter("portal_clip_active", false)
 
 func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
@@ -727,7 +741,7 @@ func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
 		return
 	
 	tp_meta.forward = exit_portal.forward_distance(for_body)
-	enable_mesh_clipping(tp_meta, exit_portal) # Switch, the main mesh is clipped by exit portal!
+	_enable_mesh_clipping(tp_meta, exit_portal) # Switch, the main mesh is clipped by exit portal!
 	
 	exit_portal._watchlist_teleportables.set(body_id, tp_meta)
 	# NOTE: Not using '_erase_tp_metadata' here, as it also frees the cloned meshes!
@@ -773,7 +787,7 @@ func forward_distance(node: Node3D) -> float:
 # Helper function meant to be used in editor. Adds [param node] as a child to 
 # [param parent]. Forces a readable name and sets the child's owner to the same
 # as parent's.
-func add_child_in_editor(parent: Node, node: Node) -> void:
+func _add_child_in_editor(parent: Node, node: Node) -> void:
 	parent.add_child(node, true)
 	# self.owner is null if this node is the scene root. Supply self.
 	node.owner = self if self.owner == null else self.owner
@@ -782,14 +796,14 @@ func add_child_in_editor(parent: Node, node: Node) -> void:
 # [br]
 # Setters fire both on editor set and when the scene starts up (the engine is
 # assigning exported members). This should prevent the second case.
-func caused_by_user_interaction() -> bool:
+func _caused_by_user_interaction() -> bool:
 	return Engine.is_editor_hint() and is_node_ready()
 
 # Editor helper function. Groups nodes in 3D editor view.
-func group_node(node: Node) -> void:
+func _group_node(node: Node) -> void:
 	node.set_meta("_edit_group_", true)
 
-func get_desired_viewport_size() -> Vector2i:
+func _calculate_viewport_size() -> Vector2i:
 	var vp_size: Vector2i = get_viewport().size
 	var aspect_ratio: float = float(vp_size.x) / float(vp_size.y)
 	
@@ -808,7 +822,7 @@ func get_desired_viewport_size() -> Vector2i:
 		ProjectSettings.get_setting("display/window/size/viewport_height")
 	)
 
-func check_tp_interaction(flag: int) -> bool:
+func _check_tp_interaction(flag: int) -> bool:
 	return (teleport_interactions & flag) > 0
 
 ## Get a point where the portal plane intersects a line. Line [param start] and [param end] 
@@ -828,7 +842,7 @@ func line_intersection(start: Vector3, end: Vector3) -> Vector3:
 
 #endregion
 
-#region GODOT ENGINE INTEGRATIONS
+#region GODOT EDITOR INTEGRATIONS
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: Array[String] = []
