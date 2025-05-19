@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bxcel82b180o3" path="res://addons/portals/scripts/portal_boxmesh.gd" id="8_top28"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vdsn8"]
+ground_bottom_color = Color(0.393086, 0.393086, 0.393085, 1)
 
 [sub_resource type="Sky" id="Sky_c4jka"]
 sky_material = SubResource("ProceduralSkyMaterial_vdsn8")
@@ -19,7 +20,7 @@ background_mode = 2
 sky = SubResource("Sky_c4jka")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.25
+ambient_light_energy = 0.35
 tonemap_mode = 3
 glow_enabled = true
 
