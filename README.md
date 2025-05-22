@@ -21,9 +21,14 @@ Go through them to find out what's in store! You can also see some screenshots b
 Also check out the [example project](https://github.com/VojtaStruhar/antichamber-example)
 where I recretated a puzzle from Antichamber.
 
+This cube has a different inside depending on from which side you are looking at it:
 ![Impossible cube](./showcase/showcase-visual-cube.png)
+This hallway is shorter on the inside than on the outside:
 ![Corridor that is shorter on the inside](./showcase/showcase-corridor.png)
+These three rooms form a full circle with a 90 degree angle in the middle:
 ![Three rooms making a full circle](./showcase/showcase-3-rooms.png)
+A seamless portal is positioned behind the column! Going around the column transports you to an
+entirely different space.
 ![Portal behind a column](./showcase/showcase-around.png)
 
 ## Credits
