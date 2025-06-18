@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://5vo86e4fice3"]
+[gd_scene load_steps=25 format=4 uid="uid://6fp86e4fice3"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_oqg62"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_wuy7a"]
