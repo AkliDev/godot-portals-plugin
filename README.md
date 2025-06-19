@@ -15,11 +15,11 @@ For documentation the plugin's documentation, see [`addons/portals/README.md`](.
 
 ## Showcase
 
-The project contains some simple levels, showcasing various aspects of the plugin.
-Go through them to find out what's in store! You can also see some screenshots below.
+[![House that's bigger on the inside](https://img.youtube.com/vi/G7Qs3Ebt51Y/0.jpg)](https://youtu.be/G7Qs3Ebt51Y)
 
-Also check out the [example project](https://github.com/VojtaStruhar/antichamber-example)
-where I recretated a puzzle from Antichamber.
+The project contains some simple levels, showcasing various aspects of the plugin. You can go through them to find out what's in store! Also see some screenshots below.
+
+Also check out the [example project](https://github.com/VojtaStruhar/antichamber-example), where I recretated a puzzle from Antichamber.
 
 This cube has a different inside depending on from which side you are looking at it:
 ![Impossible cube](./showcase/showcase-visual-cube.png)
