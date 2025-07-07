@@ -13,6 +13,9 @@ this repo (or download it as a ZIP) and move the plugin folder into your own pro
 
 For documentation the plugin's documentation, see [`addons/portals/README.md`](./addons/portals/README.md).
 
+I developed this project as part of my master's thesis. As such, [the thesis itself](https://is.muni.cz/th/ydltb/?lang=en) 
+is probably the best documentation there is at the moment.
+
 ## Showcase
 
 [![House that's bigger on the inside](https://img.youtube.com/vi/G7Qs3Ebt51Y/0.jpg)](https://youtu.be/G7Qs3Ebt51Y)
