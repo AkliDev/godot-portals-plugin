@@ -344,6 +344,9 @@ var portal_viewport: SubViewport = null
 class TeleportableMeta:
 	## Forward distance from the portal
 	var forward: float = 0
+	## True only if the [member Portal3D.player_camera] is a child of the object being teleported.
+	## In that case, we consider it the player.
+	var is_player: bool = false
 	## Meshes that the object gave for duplication. Retrieved by the 
 	## [constant Portal3D.DUPLICATE_MESHES_CALLBACK] callback.
 	var meshes: Array[MeshInstance3D] = []
@@ -552,14 +555,13 @@ func _process_teleports() -> void:
 			on_teleport.emit(teleportable)
 			exit_portal.on_teleport_receive.emit(teleportable)
 			
-			# Force the cameras to refresh if we just teleported a player
-			var was_player := not str(teleportable.get_path_to(player_camera)).begins_with(".")
-			if was_player:
+			
+			if tp_meta.is_player:
 				_process_cameras()
 				exit_portal._process_cameras()
 			
 			# Resolve teleport interactions
-			if was_player and _check_tp_interaction(TeleportInteractions.PLAYER_UPRIGHT):
+			if tp_meta.is_player and _check_tp_interaction(TeleportInteractions.PLAYER_UPRIGHT):
 				get_tree().create_tween().tween_property(teleportable, "rotation:x", 0, 0.3)
 				get_tree().create_tween().tween_property(teleportable, "rotation:z", 0, 0.3)
 			
@@ -691,11 +693,22 @@ func _on_window_resize() -> void:
 #region UTILS
 
 func _construct_tp_metadata(node: Node3D) -> void:
+	var teleportable = node.get_node(node.get_meta(TELEPORT_ROOT_META, ".")) # Usually the node itself
+	
 	var meta = TeleportableMeta.new()
 	meta.forward = forward_distance(node)
+	meta.is_player = not str(teleportable.get_path_to(player_camera)).begins_with(".")
 	
-	if _check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES) and \
-		node.has_method(DUPLICATE_MESHES_CALLBACK):
+	## This is a workaround to prevent flickering when traversing portals.
+	## There is a bit of lag when restarting RTT when the exit portal becomes physically visible.
+	## Ensuring both portals are updated regardless of visibility while in the portals prevents flickering.
+	## More info: https://github.com/VojtaStruhar/godot-portals-plugin/pull/4
+	if meta.is_player:
+		_set_portal_pair_update_mode(SubViewport.UPDATE_ALWAYS)
+	
+	if _check_tp_interaction(TeleportInteractions.DUPLICATE_MESHES)\
+			and node.has_method(DUPLICATE_MESHES_CALLBACK):
+		
 		meta.meshes = node.call(DUPLICATE_MESHES_CALLBACK)
 		for m: MeshInstance3D in meta.meshes:
 			var dupe = m.duplicate(0)
@@ -711,6 +724,10 @@ func _erase_tp_metadata(node_id: int) -> void:
 	var meta = _watchlist_teleportables.get(node_id)
 	if meta != null:
 		meta = meta as TeleportableMeta
+		
+		if meta.is_player:
+			_set_portal_pair_update_mode(SubViewport.UPDATE_WHEN_VISIBLE)
+			
 		for m in meta.meshes: _disable_mesh_clipping(m)
 		for c in meta.mesh_clones: c.queue_free()
 		
@@ -739,14 +756,20 @@ func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
 	
 	var body_id = for_body.get_instance_id()
 	var tp_meta = _watchlist_teleportables[body_id]
-	if tp_meta == null:
-		push_error("Attempted to trasfer teleport metadata for a node that is not being watched.")
-		return
+	assert(tp_meta != null, "Attempted to trasfer teleport metadata for a node that is not being watched.")
 	
 	tp_meta.forward = exit_portal.forward_distance(for_body)
 	_enable_mesh_clipping(tp_meta, exit_portal) # Switch, the main mesh is clipped by exit portal!
 	
 	exit_portal._watchlist_teleportables.set(body_id, tp_meta)
+	
+	if tp_meta.is_player and exit_portal.exit_portal != self:
+		# Not a portal pair - the transition isn't seamless anyways. Flip the update 
+		# mode of this portal "manually" and enable the next portal pair, since `_construct_tp_metadata`
+		# will not get called there. Usually portals are symmetric, though.
+		portal_viewport.set_update_mode(SubViewport.UPDATE_WHEN_VISIBLE)
+		exit_portal._set_portal_pair_update_mode(SubViewport.UPDATE_ALWAYS)
+	
 	# NOTE: Not using '_erase_tp_metadata' here, as it also frees the cloned meshes!
 	_watchlist_teleportables.erase(body_id)
 
@@ -827,6 +850,12 @@ func _calculate_viewport_size() -> Vector2i:
 
 func _check_tp_interaction(flag: int) -> bool:
 	return (teleport_interactions & flag) > 0
+
+func _set_portal_pair_update_mode(mode: SubViewport.UpdateMode) -> void:
+	assert(is_instance_valid(exit_portal))
+	self.portal_viewport.set_update_mode(mode)
+	if exit_portal.portal_viewport:
+		exit_portal.portal_viewport.set_update_mode(mode)
 
 ## Get a point where the portal plane intersects a line. Line [param start] and [param end] 
 ## are in global coordinates and so is the result. Used for forwarding raycast queries.
