@@ -13,7 +13,7 @@
 resource_name = "CL_DebugViewports"
 script/source = "extends CanvasLayer
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(\"toggle_portals\"):
 		self.visible = !visible
 "

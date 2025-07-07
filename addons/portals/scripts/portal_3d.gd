@@ -471,7 +471,7 @@ func _ready() -> void:
 		teleport_area.collision_mask = teleport_collision_mask
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
@@ -733,22 +733,6 @@ func _erase_tp_metadata(node_id: int) -> void:
 		
 	_watchlist_teleportables.erase(node_id)
 
-func _enable_mesh_clipping(meta: TeleportableMeta, along_portal: Portal3D) -> void:
-	for mi: MeshInstance3D in meta.meshes:
-		var clip_normal = signf(meta.forward) * along_portal.global_basis.z
-		mi.set_instance_shader_parameter("portal_clip_active", true)
-		mi.set_instance_shader_parameter("portal_clip_point", along_portal.global_position)
-		mi.set_instance_shader_parameter("portal_clip_normal", clip_normal)
-	
-	var exit = along_portal.exit_portal
-	for clone: MeshInstance3D in meta.mesh_clones:
-		var clip_normal = signf(meta.forward) * exit.global_basis.z
-		clone.set_instance_shader_parameter("portal_clip_active", true)
-		clone.set_instance_shader_parameter("portal_clip_point", exit.global_position)
-		clone.set_instance_shader_parameter("portal_clip_normal", clip_normal)
-
-func _disable_mesh_clipping(mi: MeshInstance3D) -> void:
-	mi.set_instance_shader_parameter("portal_clip_active", false)
 
 func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
 	if not exit_portal.is_teleport:
@@ -772,6 +756,24 @@ func _transfer_tp_metadata_to_exit(for_body: Node3D) -> void:
 	
 	# NOTE: Not using '_erase_tp_metadata' here, as it also frees the cloned meshes!
 	_watchlist_teleportables.erase(body_id)
+
+
+func _enable_mesh_clipping(meta: TeleportableMeta, along_portal: Portal3D) -> void:
+	for mi: MeshInstance3D in meta.meshes:
+		var clip_normal = signf(meta.forward) * along_portal.global_basis.z
+		mi.set_instance_shader_parameter("portal_clip_active", true)
+		mi.set_instance_shader_parameter("portal_clip_point", along_portal.global_position)
+		mi.set_instance_shader_parameter("portal_clip_normal", clip_normal)
+	
+	var exit = along_portal.exit_portal
+	for clone: MeshInstance3D in meta.mesh_clones:
+		var clip_normal = signf(meta.forward) * exit.global_basis.z
+		clone.set_instance_shader_parameter("portal_clip_active", true)
+		clone.set_instance_shader_parameter("portal_clip_point", exit.global_position)
+		clone.set_instance_shader_parameter("portal_clip_normal", clip_normal)
+
+func _disable_mesh_clipping(mi: MeshInstance3D) -> void:
+	mi.set_instance_shader_parameter("portal_clip_active", false)
 
 ## [b]Crucial[/b] piece of a portal - transforming where objects should appear 
 ## on the other side. Used for both cameras and teleports.

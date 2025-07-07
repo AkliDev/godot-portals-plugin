@@ -11,7 +11,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 ## Implements [member Portal3D.ON_TELEPORT_CALLBACK]
-func on_teleport(portal: Portal3D) -> void:
+func on_teleport(_portal: Portal3D) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_child(cooldown)
 	cooldown.start(fire_cooldown)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("fire") and cooldown.is_stopped():
 		cooldown.start()
 		var bullet: RigidBody3D = projectile_scene.instantiate()
