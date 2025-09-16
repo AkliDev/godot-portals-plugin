@@ -934,20 +934,19 @@ func _get_property_list() -> Array[Dictionary]:
 	
 	config.append(AtExport.group_end())
 	
-	config.append(AtExport.bool_("is_teleport"))
+	# TELEPORT GROUP
+	config.append(AtExport.group("Teleport"))
+	config.append(AtExport.bool_("is_teleport", true))
+	config.append(
+		AtExport.enum_("teleport_direction", &"Portal3D.TeleportDirection", TeleportDirection))
+	config.append(AtExport.float_range("rigidbody_boost", 0, 5, 0.1, ["or_greater"]))
+	config.append(AtExport.float_range("teleport_tolerance", 0.0, 5.0, 0.1, ["or_greater"]))
+	var opts: Array = TeleportInteractions.keys().map(func(s): return s.capitalize())
+	config.append(AtExport.int_flags("teleport_interactions", opts))
+	config.append(AtExport.int_physics_3d("teleport_collision_mask"))
+	config.append(AtExport.group_end())
 	
-	if is_teleport:
-		config.append(AtExport.group("Teleport"))
-		
-		config.append(
-			AtExport.enum_("teleport_direction", &"Portal3D.TeleportDirection", TeleportDirection))
-		config.append(AtExport.float_range("rigidbody_boost", 0, 5, 0.1, ["or_greater"]))
-		config.append(AtExport.float_range("teleport_tolerance", 0.0, 5.0, 0.1, ["or_greater"]))
-		var opts: Array = TeleportInteractions.keys().map(func(s): return s.capitalize())
-		config.append(AtExport.int_flags("teleport_interactions", opts))
-		config.append(AtExport.int_physics_3d("teleport_collision_mask"))
-		config.append(AtExport.group_end())
-	
+	# ADVANCED GROUP
 	config.append(AtExport.group("Advanced"))
 	config.append(AtExport.bool_("start_deactivated"))
 	

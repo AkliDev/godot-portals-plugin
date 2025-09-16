@@ -39,8 +39,11 @@ static func button(propname: String, button_text: String, button_icon: String = 
 	return result
 
 ## [annotation @GDScript.@export] bool variables
-static func bool_(propname: String) -> Dictionary:
-	return _base(propname, TYPE_BOOL)
+static func bool_(propname: String, group_enable: bool = false) -> Dictionary:
+	var result := _base(propname, TYPE_BOOL)
+	if group_enable:
+		result["hint"] = PROPERTY_HINT_GROUP_ENABLE
+	return result
 
 ## [annotation @GDScript.@export] [Color] variables
 static func color(propname: String) -> Dictionary:
