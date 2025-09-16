@@ -9,6 +9,13 @@ of my Master's thesis on FI MUNI.
 - The plugin itself is located in the `addons/portals` directory. You can clone
 this repo (or download it as a ZIP) and move the plugin folder into your own project.
 
+### Version compatibility
+
+| Godot Version | Latest plugin version |
+| :-----------: | :-------------------: |
+| 4.5           | master branch         |
+| 4.4           | 1.0.1                 |
+
 ## Documentation
 
 For documentation the plugin's documentation, see [`addons/portals/README.md`](./addons/portals/README.md).
