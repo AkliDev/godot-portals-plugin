@@ -458,7 +458,6 @@ func _ready() -> void:
 	
 	if not start_deactivated:
 		_setup_cameras()
-		get_viewport().size_changed.connect(_on_window_resize)
 	else:
 		deactivate.call_deferred(true)
 	
@@ -657,6 +656,10 @@ func _setup_cameras() -> void:
 		
 		# Connect the viewport to the mesh. Mesh material setup has to run BEFORE this
 		portal_mesh.material_override.set_shader_parameter("albedo", portal_viewport.get_texture())
+		
+		var vp := get_viewport()
+		if not vp.size_changed.is_connected(_on_window_resize):
+			vp.size_changed.connect(_on_window_resize)
 	else:
 		push_error("%s has no exit_portal! Failed to setup cameras." % name)
 
