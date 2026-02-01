@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfuudoym2pnvu"]
+[gd_scene format=3 uid="uid://dfuudoym2pnvu"]
 
 [ext_resource type="Script" uid="uid://c8my0avh3yv6i" path="res://main.gd" id="1_ig7tw"]
 
@@ -7,7 +7,7 @@ font_size = 32
 shadow_size = 15
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1303550349]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ grow_vertical = 2
 script = ExtResource("1_ig7tw")
 levels_directory = "res://levels"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=698751244]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -27,23 +27,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=976513817]
 layout_mode = 2
 text = "3D Portals - Testing levels"
 label_settings = SubResource("LabelSettings_ig7tw")
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=569562939]
 layout_mode = 2
 
-[node name="LevelsContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="LevelsContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=118128005]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=92670740]
 layout_mode = 2
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=331296705]
 layout_mode = 2
 text = "Quit"
 

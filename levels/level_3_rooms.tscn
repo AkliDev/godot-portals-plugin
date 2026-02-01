@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://2c7f2asld8tc"]
+[gd_scene format=4 uid="uid://2c7f2asld8tc"]
 
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="1_es8rs"]
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="2_ymnpb"]
@@ -70,102 +70,102 @@ size = Vector3(2, 2, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_hlt8e"]
 size = Vector3(2, 2, 1)
 
-[node name="Level_3_Rooms" type="Node3D"]
+[node name="Level_3_Rooms" type="Node3D" unique_id=1154236907]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=104516463]
 environment = SubResource("Environment_12dav")
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=2080734240 node_paths=PackedStringArray("camera")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.0484, 0.0758321, -5.01666)
 collision_layer = 32769
 script = ExtResource("1_es8rs")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1642577294]
 shape = SubResource("CapsuleShape3D_qu4im")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=529935601]
 mesh = SubResource("CapsuleMesh_63ae4")
 
-[node name="PlayerCamera" type="Camera3D" parent="Player"]
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=525328979]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 visible = false
 current = true
 fov = 60.0
 
-[node name="Room_Red" type="MeshInstance3D" parent="."]
+[node name="Room_Red" type="MeshInstance3D" parent="." unique_id=496884376]
 mesh = SubResource("ArrayMesh_b5ijo")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Room_Red"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Room_Red" unique_id=1242112993]
 light_color = Color(1, 0.269767, 0.3811, 1)
 omni_range = 2.935
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_Red"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_Red" unique_id=307618183]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_Red/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_Red/StaticBody3D" unique_id=1252843893]
 shape = SubResource("ConcavePolygonShape3D_ugeu4")
 
-[node name="Ground" type="MeshInstance3D" parent="Room_Red"]
+[node name="Ground" type="MeshInstance3D" parent="Room_Red" unique_id=305301701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
 material_override = ExtResource("3_ugeu4")
 mesh = SubResource("BoxMesh_vdsn8")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_Red/Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_Red/Ground" unique_id=862855718]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_Red/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_Red/Ground/StaticBody3D" unique_id=1496331901]
 shape = SubResource("ConvexPolygonShape3D_c4jka")
 
-[node name="Room_Orange" type="MeshInstance3D" parent="."]
+[node name="Room_Orange" type="MeshInstance3D" parent="." unique_id=1137922302]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -5)
 mesh = SubResource("ArrayMesh_b5ijo")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_Orange"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_Orange" unique_id=1784628357]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_Orange/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_Orange/StaticBody3D" unique_id=678504324]
 shape = SubResource("ConcavePolygonShape3D_ugeu4")
 
-[node name="Ground" type="MeshInstance3D" parent="Room_Orange"]
+[node name="Ground" type="MeshInstance3D" parent="Room_Orange" unique_id=687580791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
 material_override = ExtResource("4_ingpd")
 mesh = SubResource("BoxMesh_vdsn8")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_Orange/Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_Orange/Ground" unique_id=270913585]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_Orange/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_Orange/Ground/StaticBody3D" unique_id=1323537580]
 shape = SubResource("ConvexPolygonShape3D_c4jka")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Room_Orange"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Room_Orange" unique_id=1904110505]
 light_color = Color(0.892222, 0.43823, 0, 1)
 omni_range = 2.935
 
-[node name="Room_Green" type="MeshInstance3D" parent="."]
+[node name="Room_Green" type="MeshInstance3D" parent="." unique_id=465680297]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5, 0, -5)
 mesh = SubResource("ArrayMesh_b5ijo")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_Green"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_Green" unique_id=1312859209]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_Green/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_Green/StaticBody3D" unique_id=1648008138]
 shape = SubResource("ConcavePolygonShape3D_ugeu4")
 
-[node name="Ground" type="MeshInstance3D" parent="Room_Green"]
+[node name="Ground" type="MeshInstance3D" parent="Room_Green" unique_id=250351828]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
 material_override = ExtResource("5_mmt1i")
 mesh = SubResource("BoxMesh_vdsn8")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_Green/Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_Green/Ground" unique_id=1257094065]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_Green/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_Green/Ground/StaticBody3D" unique_id=460177612]
 shape = SubResource("ConvexPolygonShape3D_c4jka")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Room_Green"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Room_Green" unique_id=1188589496]
 light_color = Color(0.556663, 0.628587, 0, 1)
 omni_range = 2.935
 
-[node name="Portal_Red" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_Red" type="Node3D" parent="." unique_id=1274846504 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.5, -0.15, 0)
@@ -189,19 +189,19 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal_Red"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal_Red" unique_id=1742515788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("7_c4jka")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_evjit")
 
-[node name="TeleportArea" type="Area3D" parent="Portal_Red"]
+[node name="TeleportArea" type="Area3D" parent="Portal_Red" unique_id=1279051290]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_Red/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_Red/TeleportArea" unique_id=1892990869]
 shape = SubResource("BoxShape3D_hlt8e")
 
-[node name="Portal_Green" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_Green" type="Node3D" parent="." unique_id=1999420744 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5, -0.15, -2.5)
@@ -225,14 +225,14 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal_Green"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal_Green" unique_id=198616347]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("7_c4jka")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_evjit")
 
-[node name="TeleportArea" type="Area3D" parent="Portal_Green"]
+[node name="TeleportArea" type="Area3D" parent="Portal_Green" unique_id=1724030212]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_Green/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_Green/TeleportArea" unique_id=916978442]
 shape = SubResource("BoxShape3D_hlt8e")

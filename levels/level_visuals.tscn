@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://ds222tuqqcsfc"]
+[gd_scene format=4 uid="uid://ds222tuqqcsfc"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_dd4c5"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_0foui"]
@@ -200,24 +200,24 @@ _surfaces = [{
 script = ExtResource("6_j7s2b")
 size = Vector3(2.6, 2.6, 1)
 
-[node name="Level_Visuals" type="Node3D"]
+[node name="Level_Visuals" type="Node3D" unique_id=1402505639]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=87520799]
 environment = SubResource("Environment_egjbn")
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=2021880928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_gwold")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=2081311983]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1266841526]
 visible = false
 shape = SubResource("BoxShape3D_0foui")
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=417451064 node_paths=PackedStringArray("camera")]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(0.275419, 0, -0.961324, 0, 1, 0, 0.961324, 0, 0.275419, -5.35382, 0.71586, 1.77945)
@@ -225,41 +225,41 @@ script = ExtResource("2_0foui")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1271653001]
 shape = SubResource("CapsuleShape3D_egjbn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1851341948]
 mesh = SubResource("CapsuleMesh_smu88")
 
-[node name="PlayerCamera" type="Camera3D" parent="Player"]
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=2061624598]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=129043589]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="Cutout" type="CSGBox3D" parent="CSGBox3D"]
+[node name="Cutout" type="CSGBox3D" parent="CSGBox3D" unique_id=1582288286]
 operation = 2
 size = Vector3(4, 2.6, 2.6)
 
-[node name="Cutout2" type="CSGBox3D" parent="CSGBox3D"]
+[node name="Cutout2" type="CSGBox3D" parent="CSGBox3D" unique_id=1332605333]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 operation = 2
 size = Vector3(4, 2.6, 2.6)
 
-[node name="Frame" type="MeshInstance3D" parent="."]
+[node name="Frame" type="MeshInstance3D" parent="." unique_id=615997254]
 transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 1.5, 0)
 mesh = SubResource("ArrayMesh_3o01d")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Frame"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Frame" unique_id=995285510]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/StaticBody3D" unique_id=166276804]
 visible = false
 shape = SubResource("BoxShape3D_cwtkw")
 
-[node name="RedPortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="RedPortal" type="Node3D" parent="." unique_id=877483786 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 1.5, 0)
@@ -272,18 +272,23 @@ viewport_size_mode = 0
 view_direction = 1
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="RedPortal_Mesh" type="MeshInstance3D" parent="RedPortal"]
+[node name="RedPortal_Mesh" type="MeshInstance3D" parent="RedPortal" unique_id=593435424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_my3fx")
 
-[node name="GreenPortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="GreenPortal" type="Node3D" parent="." unique_id=1719422664 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, -1.5)
@@ -296,18 +301,23 @@ viewport_size_mode = 0
 view_direction = 1
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal"]
+[node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal" unique_id=1817284197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_hjpwt")
 
-[node name="BluePortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="BluePortal" type="Node3D" parent="." unique_id=314163607 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 1.5, 1.5, 0)
@@ -320,18 +330,23 @@ viewport_size_mode = 0
 view_direction = 1
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal"]
+[node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal" unique_id=942972544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xqeyu")
 
-[node name="OrangePortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="OrangePortal" type="Node3D" parent="." unique_id=2121242042 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 1.5, 1.5)
@@ -344,28 +359,33 @@ viewport_size_mode = 0
 view_direction = 1
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="OrangePortal_Mesh" type="MeshInstance3D" parent="OrangePortal"]
+[node name="OrangePortal_Mesh" type="MeshInstance3D" parent="OrangePortal" unique_id=799480272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_hjk6c")
 
-[node name="VisualRooms" type="Node3D" parent="."]
+[node name="VisualRooms" type="Node3D" parent="." unique_id=709760656]
 
-[node name="RedRoom" type="MeshInstance3D" parent="VisualRooms"]
+[node name="RedRoom" type="MeshInstance3D" parent="VisualRooms" unique_id=694973827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 mesh = SubResource("BoxMesh_1gc01")
 skeleton = NodePath("../..")
 
-[node name="PropCube" parent="VisualRooms/RedRoom" instance=ExtResource("7_036eg")]
+[node name="PropCube" parent="VisualRooms/RedRoom" unique_id=1008823284 instance=ExtResource("7_036eg")]
 script = ExtResource("8_8yb2m")
 
-[node name="Portal3D" type="Node3D" parent="VisualRooms/RedRoom" node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
+[node name="Portal3D" type="Node3D" parent="VisualRooms/RedRoom" unique_id=969474701 node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1.3, 0, 0)
@@ -379,26 +399,31 @@ viewport_size_mode = 0
 view_direction = 0
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/RedRoom/Portal3D"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/RedRoom/Portal3D" unique_id=905942370]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xfi6y")
 
-[node name="GreenRoom" type="MeshInstance3D" parent="VisualRooms"]
+[node name="GreenRoom" type="MeshInstance3D" parent="VisualRooms" unique_id=1748703044]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -3.75)
 mesh = SubResource("BoxMesh_8yb2m")
 skeleton = NodePath("../..")
 
-[node name="PropTorus" parent="VisualRooms/GreenRoom" instance=ExtResource("9_1bwv4")]
+[node name="PropTorus" parent="VisualRooms/GreenRoom" unique_id=870960625 instance=ExtResource("9_1bwv4")]
 script = ExtResource("8_8yb2m")
 
-[node name="Portal3D" type="Node3D" parent="VisualRooms/GreenRoom" node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
+[node name="Portal3D" type="Node3D" parent="VisualRooms/GreenRoom" unique_id=1083968579 node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1.3, 0, 0)
@@ -412,23 +437,28 @@ viewport_size_mode = 0
 view_direction = 0
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/GreenRoom/Portal3D"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/GreenRoom/Portal3D" unique_id=306346616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ldlqq")
 
-[node name="BlueRoom" type="MeshInstance3D" parent="VisualRooms"]
+[node name="BlueRoom" type="MeshInstance3D" parent="VisualRooms" unique_id=1349310191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -7.25)
 mesh = SubResource("BoxMesh_cwtkw")
 skeleton = NodePath("../..")
 
-[node name="Portal3D" type="Node3D" parent="VisualRooms/BlueRoom" node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
+[node name="Portal3D" type="Node3D" parent="VisualRooms/BlueRoom" unique_id=444556605 node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1.3, 0, 0)
@@ -442,26 +472,31 @@ viewport_size_mode = 0
 view_direction = 0
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/BlueRoom/Portal3D"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/BlueRoom/Portal3D" unique_id=1026847468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_u0w78")
 
-[node name="PropPrism" parent="VisualRooms/BlueRoom" instance=ExtResource("12_1gc01")]
+[node name="PropPrism" parent="VisualRooms/BlueRoom" unique_id=546185420 instance=ExtResource("12_1gc01")]
 script = ExtResource("8_8yb2m")
 
-[node name="OrangeRoom" type="MeshInstance3D" parent="VisualRooms"]
+[node name="OrangeRoom" type="MeshInstance3D" parent="VisualRooms" unique_id=1058156573]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -10.75)
 mesh = SubResource("BoxMesh_j7s2b")
 skeleton = NodePath("../..")
 
-[node name="Portal3D" type="Node3D" parent="VisualRooms/OrangeRoom" node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
+[node name="Portal3D" type="Node3D" parent="VisualRooms/OrangeRoom" unique_id=1806612022 node_paths=PackedStringArray("exit_portal", "player_camera") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1.3, 0, 0)
@@ -475,16 +510,21 @@ viewport_size_mode = 0
 view_direction = 0
 portal_render_layer = 128
 is_teleport = false
+teleport_direction = 2
+rigidbody_boost = 0.0
+teleport_tolerance = 0.5
+teleport_interactions = 3
+teleport_collision_mask = 32768
 start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/OrangeRoom/Portal3D"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="VisualRooms/OrangeRoom/Portal3D" unique_id=1192214526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("6_22aq8")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_nw007")
 
-[node name="PropCylinder" parent="VisualRooms/OrangeRoom" instance=ExtResource("14_k6lcj")]
+[node name="PropCylinder" parent="VisualRooms/OrangeRoom" unique_id=1868152676 instance=ExtResource("14_k6lcj")]
 script = ExtResource("8_8yb2m")

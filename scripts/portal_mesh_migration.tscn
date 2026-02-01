@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw727pipehonx"]
+[gd_scene format=3 uid="uid://cw727pipehonx"]
 
 [sub_resource type="GDScript" id="GDScript_7nky4"]
 resource_name = "PortalMigration"
@@ -18,6 +18,6 @@ func migrate() -> void:
 		n._setup_mesh()
 "
 
-[node name="PortalMeshMigration" type="Node"]
+[node name="PortalMeshMigration" type="Node" unique_id=1122562130]
 editor_description = "Editor tool. Place into the scene, remove all portal meshes and recreate them. Used only for debugging"
 script = SubResource("GDScript_7nky4")

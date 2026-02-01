@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cey6k8ip6nn8w"]
+[gd_scene format=4 uid="uid://cey6k8ip6nn8w"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_6hsda"]
 [ext_resource type="Script" uid="uid://bqnap47txp42k" path="res://levels/level_basics.gd" id="1_dqevk"]
@@ -94,19 +94,19 @@ size = Vector3(5, 3, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lvjw"]
 
-[node name="Level_Forward" type="Node3D"]
+[node name="Level_Forward" type="Node3D" unique_id=196602828]
 script = ExtResource("1_dqevk")
 
-[node name="PoorMansCrosshair" parent="." instance=ExtResource("9_fv6tu")]
+[node name="PoorMansCrosshair" parent="." unique_id=2100654611 instance=ExtResource("9_fv6tu")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=578089838]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=312744739]
 environment = SubResource("Environment_dqevk")
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=174293968 node_paths=PackedStringArray("camera")]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448394, 0.875832, 5.91448)
@@ -115,70 +115,70 @@ script = ExtResource("4_nrnmy")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=187625979]
 shape = SubResource("CapsuleShape3D_62h3h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1834018745]
 mesh = SubResource("CapsuleMesh_wviww")
 
-[node name="PlayerCamera" type="Camera3D" parent="Player"]
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=1680664189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
-[node name="ForwardedRaycast" type="RayCast3D" parent="Player/PlayerCamera"]
+[node name="ForwardedRaycast" type="RayCast3D" parent="Player/PlayerCamera" unique_id=1835108304]
 target_position = Vector3(0, 0, -20)
 collision_mask = 129
 collide_with_areas = true
 debug_shape_thickness = 3
 script = ExtResource("3_4lvjw")
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1684489723]
 transform = Transform3D(1, -1.00701e-05, 8.73277e-06, 1.00701e-05, 1, -1.12671e-05, -8.73277e-06, 1.12671e-05, 1, 0, -0.5, 0)
 material_override = ExtResource("1_ym1tr")
 mesh = SubResource("BoxMesh_2clkf")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=190091188]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=467813682]
 shape = SubResource("ConvexPolygonShape3D_hv1ah")
 
-[node name="Ground2" type="MeshInstance3D" parent="."]
+[node name="Ground2" type="MeshInstance3D" parent="." unique_id=213364247]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, 0)
 material_override = ExtResource("3_nrnmy")
 mesh = SubResource("BoxMesh_2clkf")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground2" unique_id=1686217932]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/StaticBody3D" unique_id=884905227]
 shape = SubResource("ConvexPolygonShape3D_hv1ah")
 
-[node name="PortalFrame" type="MeshInstance3D" parent="."]
+[node name="PortalFrame" type="MeshInstance3D" parent="." unique_id=1466021753]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.501, 0)
 material_override = ExtResource("1_6hsda")
 mesh = SubResource("ArrayMesh_wviww")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="PortalFrame"]
+[node name="StaticBody3D" type="StaticBody3D" parent="PortalFrame" unique_id=321674751]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="PortalFrame/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="PortalFrame/StaticBody3D" unique_id=860768764]
 visible = false
 shape = SubResource("ConcavePolygonShape3D_dqevk")
 
-[node name="PortalFrame2" type="MeshInstance3D" parent="."]
+[node name="PortalFrame2" type="MeshInstance3D" parent="." unique_id=1686275947]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 12, 1.501, 0)
 material_override = ExtResource("1_6hsda")
 mesh = SubResource("ArrayMesh_wviww")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="PortalFrame2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="PortalFrame2" unique_id=1767869301]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="PortalFrame2/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="PortalFrame2/StaticBody3D" unique_id=292585902]
 visible = false
 shape = SubResource("ConcavePolygonShape3D_dqevk")
 
-[node name="GreenPortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="GreenPortal" type="Node3D" parent="." unique_id=1224552533 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -202,19 +202,19 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="GreenPortal"]
+[node name="TeleportArea" type="Area3D" parent="GreenPortal" unique_id=427010816]
 
-[node name="Collider" type="CollisionShape3D" parent="GreenPortal/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="GreenPortal/TeleportArea" unique_id=842253553]
 shape = SubResource("BoxShape3D_wviww")
 
-[node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal"]
+[node name="GreenPortal_Mesh" type="MeshInstance3D" parent="GreenPortal" unique_id=1596771125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("9_7bsmn")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_76ped")
 
-[node name="BluePortal" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="BluePortal" type="Node3D" parent="." unique_id=1027331609 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 12, 1.5, 0)
@@ -238,31 +238,31 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="BluePortal"]
+[node name="TeleportArea" type="Area3D" parent="BluePortal" unique_id=403404761]
 
-[node name="Collider" type="CollisionShape3D" parent="BluePortal/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="BluePortal/TeleportArea" unique_id=1339060919]
 shape = SubResource("BoxShape3D_dqevk")
 
-[node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal"]
+[node name="BluePortal_Mesh" type="MeshInstance3D" parent="BluePortal" unique_id=485058784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("9_7bsmn")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_wirfr")
 
-[node name="ColorshiftCube" type="StaticBody3D" parent="."]
+[node name="ColorshiftCube" type="StaticBody3D" parent="." unique_id=496224362]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.75, 0.5, -3.75)
 script = ExtResource("7_dqevk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ColorshiftCube"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ColorshiftCube" unique_id=738796709]
 shape = SubResource("BoxShape3D_p3b8s")
 
-[node name="CubeMesh" type="MeshInstance3D" parent="ColorshiftCube"]
+[node name="CubeMesh" type="MeshInstance3D" parent="ColorshiftCube" unique_id=941408884]
 material_override = SubResource("StandardMaterial3D_4lvjw")
 mesh = SubResource("BoxMesh_4lvjw")
 skeleton = NodePath("../..")
 
-[node name="Label3D" type="Label3D" parent="ColorshiftCube"]
+[node name="Label3D" type="Label3D" parent="ColorshiftCube" unique_id=1782079942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.928163, 0)
 billboard = 2
 text = "Shoot to change color"

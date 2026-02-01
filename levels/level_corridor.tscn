@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://of26pcjgocig"]
+[gd_scene format=4 uid="uid://of26pcjgocig"]
 
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="1_r5s0a"]
 [ext_resource type="Script" uid="uid://d2crarvkhd45r" path="res://scripts/player.gd" id="2_f3hbn"]
@@ -66,69 +66,69 @@ size = Vector3(1.5, 2, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qu4im"]
 size = Vector3(1.5, 2, 1)
 
-[node name="Level_Corridor" type="Node3D"]
+[node name="Level_Corridor" type="Node3D" unique_id=1932288789]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=322428218]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1739939328]
 environment = SubResource("Environment_12dav")
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1781621336]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = ExtResource("1_r5s0a")
 mesh = SubResource("BoxMesh_7galk")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=469736452]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1809839494]
 shape = SubResource("BoxShape3D_12dav")
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1781338155 node_paths=PackedStringArray("camera")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.8484, 0.875832, 0.0833402)
 collision_layer = 32769
 script = ExtResource("2_f3hbn")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1122710594]
 shape = SubResource("CapsuleShape3D_qu4im")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1948065394]
 mesh = SubResource("CapsuleMesh_63ae4")
 
-[node name="PlayerCamera" type="Camera3D" parent="Player"]
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=1732912673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 fov = 60.0
 
-[node name="PropCube" parent="." instance=ExtResource("3_36whs")]
+[node name="PropCube" parent="." unique_id=1520291010 instance=ExtResource("3_36whs")]
 transform = Transform3D(0.924745, 0, 0.380586, 0, 1, 0, -0.380586, 0, 0.924745, -12.65, 0.5, -0.85)
 
-[node name="Corridor" type="MeshInstance3D" parent="."]
+[node name="Corridor" type="MeshInstance3D" parent="." unique_id=531799532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 1.05, -1.75)
 material_override = ExtResource("4_12dav")
 mesh = SubResource("ArrayMesh_0pr64")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Corridor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Corridor" unique_id=1926411354]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Corridor/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Corridor/StaticBody3D" unique_id=2141917639]
 shape = SubResource("ConcavePolygonShape3D_2jx5d")
 
-[node name="Corridor2" type="MeshInstance3D" parent="."]
+[node name="Corridor2" type="MeshInstance3D" parent="." unique_id=804251574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 1.05, -1.75)
 material_override = ExtResource("4_12dav")
 mesh = SubResource("ArrayMesh_0pr64")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Corridor2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Corridor2" unique_id=1411314689]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Corridor2/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Corridor2/StaticBody3D" unique_id=1784638008]
 shape = SubResource("ConcavePolygonShape3D_2jx5d")
 
-[node name="Portal3D" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal3D" type="Node3D" parent="." unique_id=691401361 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7.7, 1, -1.75)
@@ -152,19 +152,19 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal3D"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal3D" unique_id=666550258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("5_12dav")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_jf5d6")
 
-[node name="TeleportArea" type="Area3D" parent="Portal3D"]
+[node name="TeleportArea" type="Area3D" parent="Portal3D" unique_id=1643698281]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal3D/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal3D/TeleportArea" unique_id=302962140]
 shape = SubResource("BoxShape3D_qu4im")
 
-[node name="Portal3D2" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal3D2" type="Node3D" parent="." unique_id=645379295 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 8.4, 1, -1.75)
@@ -188,14 +188,14 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal3D2"]
+[node name="Portal3D_Mesh" type="MeshInstance3D" parent="Portal3D2" unique_id=2000649730]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 524288
 material_override = ExtResource("5_12dav")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_jf5d6")
 
-[node name="TeleportArea" type="Area3D" parent="Portal3D2"]
+[node name="TeleportArea" type="Area3D" parent="Portal3D2" unique_id=1943661681]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal3D2/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal3D2/TeleportArea" unique_id=862300865]
 shape = SubResource("BoxShape3D_qu4im")

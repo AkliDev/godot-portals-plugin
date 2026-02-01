@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://664na4csmqe"]
+[gd_scene format=4 uid="uid://664na4csmqe"]
 
 [ext_resource type="Shader" uid="uid://xoa3hj7pynf" path="res://scripts/clipping_shader.gdshader" id="1_picon"]
 [ext_resource type="PackedScene" uid="uid://dxvxy65pv5hoe" path="res://assets/prototyping/prop_sphere.tscn" id="2_xywcf"]
@@ -126,25 +126,24 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAvwAAAD8AAAAAAAAAPwAAAD8AAAAAAAAAvwAAAL8AAAAAAAAAPwAAAL8AAAAAAAAAvwAAAD8AAIC/AAAAPwAAAD8AAIC/AAAAvwAAAL8AAIC/AAAAPwAAAL8AAIC//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgA==")
 }]
 script = ExtResource("3_efj51")
-size = Vector3(1, 1, 1)
 metadata/_custom_type_script = "uid://bxcel82b180o3"
 
-[node name="ShaderPlayground" type="Node3D"]
+[node name="ShaderPlayground" type="Node3D" unique_id=1244490530]
 
-[node name="ShaderTest" type="MeshInstance3D" parent="."]
+[node name="ShaderTest" type="MeshInstance3D" parent="." unique_id=1811178074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0102, 0.185177, 0.172441)
 mesh = SubResource("BoxMesh_efj51")
 
-[node name="PropCube" type="MeshInstance3D" parent="."]
+[node name="PropCube" type="MeshInstance3D" parent="." unique_id=844974551]
 transform = Transform3D(1, 0, 0, 0, 0.852786, -0.52226, 0, 0.52226, 0.852786, 0, 0, 1.06521)
 material_override = SubResource("ShaderMaterial_efj51")
 mesh = SubResource("BoxMesh_tk8yd")
 
-[node name="PropSphere" parent="." instance=ExtResource("2_xywcf")]
+[node name="PropSphere" parent="." unique_id=1899261151 instance=ExtResource("2_xywcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.24852)
 
-[node name="ShaderChecker" type="Node" parent="."]
+[node name="ShaderChecker" type="Node" parent="." unique_id=1413602912]
 
-[node name="PortalBox" type="MeshInstance3D" parent="."]
+[node name="PortalBox" type="MeshInstance3D" parent="." unique_id=1671158396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4601)
 mesh = SubResource("ArrayMesh_tk8yd")

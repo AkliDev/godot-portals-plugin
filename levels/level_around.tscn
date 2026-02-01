@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cceqtevdskikh"]
+[gd_scene format=4 uid="uid://cceqtevdskikh"]
 
 [ext_resource type="Script" uid="uid://dh2f564q4c8g1" path="res://levels/level_around.gd" id="1_u0pli"]
 [ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://assets/prototyping/M_prototype_dark.tres" id="2_0dr2q"]
@@ -195,17 +195,17 @@ _surfaces = [{
 script = ExtResource("9_0qp41")
 size = Vector3(2.995, 4, 1)
 
-[node name="Level_Around" type="Node3D"]
+[node name="Level_Around" type="Node3D" unique_id=1951281143]
 script = ExtResource("1_u0pli")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1846877720]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1350755636]
 environment = SubResource("Environment_8bheg")
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=719227658 node_paths=PackedStringArray("camera")]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8881, 0.875832, -1.34142)
@@ -214,21 +214,21 @@ script = ExtResource("8_eqmv0")
 camera = NodePath("PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1042914161]
 shape = SubResource("CapsuleShape3D_k2msj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2072271091]
 mesh = SubResource("CapsuleMesh_lff3k")
 
-[node name="PlayerCamera" type="Camera3D" parent="Player"]
+[node name="PlayerCamera" type="Camera3D" parent="Player" unique_id=1115140324]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 current = true
 
-[node name="Room_A" type="Node3D" parent="."]
+[node name="Room_A" type="Node3D" parent="." unique_id=202642066]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Ground" type="MeshInstance3D" parent="Room_A"]
+[node name="Ground" type="MeshInstance3D" parent="Room_A" unique_id=1758754855]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = ExtResource("2_0dr2q")
 mesh = SubResource("BoxMesh_k2msj")
@@ -236,54 +236,54 @@ skeleton = NodePath("../..")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_A/Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_A/Ground" unique_id=139621489]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_A/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_A/Ground/StaticBody3D" unique_id=1709546824]
 shape = SubResource("ConvexPolygonShape3D_uy66w")
 
-[node name="Room" type="MeshInstance3D" parent="Room_A"]
+[node name="Room" type="MeshInstance3D" parent="Room_A" unique_id=1522450390]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = ExtResource("4_u0pli")
 mesh = SubResource("ArrayMesh_pis0n")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_A/Room"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_A/Room" unique_id=795004188]
 visible = false
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_A/Room/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_A/Room/StaticBody3D" unique_id=609627737]
 shape = SubResource("ConcavePolygonShape3D_5h72j")
 
-[node name="Column" type="MeshInstance3D" parent="Room_A/Room"]
+[node name="Column" type="MeshInstance3D" parent="Room_A/Room" unique_id=2050964513]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
 mesh = SubResource("CylinderMesh_ovanv")
 skeleton = NodePath("../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_A/Room/Column"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_A/Room/Column" unique_id=1664799331]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_A/Room/Column/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_A/Room/Column/StaticBody3D" unique_id=583951892]
 shape = SubResource("CylinderShape3D_pis0n")
 
-[node name="Bottom" type="MeshInstance3D" parent="Room_A/Room/Column"]
+[node name="Bottom" type="MeshInstance3D" parent="Room_A/Room/Column" unique_id=1304345327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.85, 0)
 mesh = SubResource("CylinderMesh_pis0n")
 
-[node name="Bottom2" type="MeshInstance3D" parent="Room_A/Room/Column"]
+[node name="Bottom2" type="MeshInstance3D" parent="Room_A/Room/Column" unique_id=319175000]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 1.9, 0)
 mesh = SubResource("CylinderMesh_pis0n")
 
-[node name="Label3D" type="Label3D" parent="Room_A"]
+[node name="Label3D" type="Label3D" parent="Room_A" unique_id=1128384138]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, -1.75)
 billboard = 2
 text = "A"
 font_size = 280
 
-[node name="Room_B" type="Node3D" parent="."]
+[node name="Room_B" type="Node3D" parent="." unique_id=1596638782]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Ground" type="MeshInstance3D" parent="Room_B"]
+[node name="Ground" type="MeshInstance3D" parent="Room_B" unique_id=1535639179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = ExtResource("2_0dr2q")
 mesh = SubResource("BoxMesh_k2msj")
@@ -291,55 +291,55 @@ skeleton = NodePath("../..")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_B/Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_B/Ground" unique_id=742700505]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_B/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_B/Ground/StaticBody3D" unique_id=393341607]
 shape = SubResource("ConvexPolygonShape3D_uy66w")
 
-[node name="Room" type="MeshInstance3D" parent="Room_B"]
+[node name="Room" type="MeshInstance3D" parent="Room_B" unique_id=1450979019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = ExtResource("5_0dr2q")
 mesh = SubResource("ArrayMesh_pis0n")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_B/Room"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_B/Room" unique_id=1337200816]
 visible = false
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_B/Room/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_B/Room/StaticBody3D" unique_id=1717008449]
 shape = SubResource("ConcavePolygonShape3D_5h72j")
 
-[node name="Column" type="MeshInstance3D" parent="Room_B/Room"]
+[node name="Column" type="MeshInstance3D" parent="Room_B/Room" unique_id=729399119]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
 mesh = SubResource("CylinderMesh_ovanv")
 skeleton = NodePath("../../..")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_B/Room/Column"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_B/Room/Column" unique_id=389564483]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_B/Room/Column/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_B/Room/Column/StaticBody3D" unique_id=1729551716]
 shape = SubResource("CylinderShape3D_pis0n")
 
-[node name="Bottom" type="MeshInstance3D" parent="Room_B/Room/Column"]
+[node name="Bottom" type="MeshInstance3D" parent="Room_B/Room/Column" unique_id=1171757725]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.85, 0)
 mesh = SubResource("CylinderMesh_pis0n")
 
-[node name="Bottom2" type="MeshInstance3D" parent="Room_B/Room/Column"]
+[node name="Bottom2" type="MeshInstance3D" parent="Room_B/Room/Column" unique_id=195696030]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 1.9, 0)
 mesh = SubResource("CylinderMesh_pis0n")
 
-[node name="Label3D2" type="Label3D" parent="Room_B"]
+[node name="Label3D2" type="Label3D" parent="Room_B" unique_id=1631262558]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, -1.75)
 billboard = 2
 text = "B"
 font_size = 280
 
-[node name="Room_C" type="Node3D" parent="."]
+[node name="Room_C" type="Node3D" parent="." unique_id=1301407682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Ground" type="MeshInstance3D" parent="Room_C"]
+[node name="Ground" type="MeshInstance3D" parent="Room_C" unique_id=1522997218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = ExtResource("2_0dr2q")
 mesh = SubResource("BoxMesh_k2msj")
@@ -347,85 +347,85 @@ skeleton = NodePath("../..")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_C/Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_C/Ground" unique_id=1476458595]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_C/Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_C/Ground/StaticBody3D" unique_id=1862804337]
 shape = SubResource("ConvexPolygonShape3D_uy66w")
 
-[node name="Room" type="MeshInstance3D" parent="Room_C"]
+[node name="Room" type="MeshInstance3D" parent="Room_C" unique_id=83780251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = ExtResource("6_0qp41")
 mesh = SubResource("ArrayMesh_pis0n")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_C/Room"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_C/Room" unique_id=850763108]
 visible = false
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_C/Room/StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Room_C/Room/StaticBody3D" unique_id=2028995440]
 shape = SubResource("ConcavePolygonShape3D_5h72j")
 
-[node name="Column" type="MeshInstance3D" parent="Room_C/Room"]
+[node name="Column" type="MeshInstance3D" parent="Room_C/Room" unique_id=685445473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
 mesh = SubResource("CylinderMesh_ovanv")
 skeleton = NodePath("../../..")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Room_C/Room/Column"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_C/Room/Column" unique_id=783546541]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_C/Room/Column/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_C/Room/Column/StaticBody3D" unique_id=304867869]
 shape = SubResource("CylinderShape3D_pis0n")
 
-[node name="Bottom" type="MeshInstance3D" parent="Room_C/Room/Column"]
+[node name="Bottom" type="MeshInstance3D" parent="Room_C/Room/Column" unique_id=913456995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.85, 0)
 mesh = SubResource("CylinderMesh_pis0n")
 
-[node name="Bottom2" type="MeshInstance3D" parent="Room_C/Room/Column"]
+[node name="Bottom2" type="MeshInstance3D" parent="Room_C/Room/Column" unique_id=2008924441]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 1.9, 0)
 mesh = SubResource("CylinderMesh_pis0n")
 
-[node name="Label3D2" type="Label3D" parent="Room_C"]
+[node name="Label3D2" type="Label3D" parent="Room_C" unique_id=1906431005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, -1.75)
 billboard = 2
 text = "C"
 font_size = 280
 
-[node name="PortalActivator_A" type="Area3D" parent="." node_paths=PackedStringArray("portal_left", "portal_right")]
+[node name="PortalActivator_A" type="Area3D" parent="." unique_id=313684042 node_paths=PackedStringArray("portal_left", "portal_right")]
 monitorable = false
 script = ExtResource("9_0dr2q")
 portal_left = NodePath("../Portal_AC")
 portal_right = NodePath("../Portal_AB")
 
-[node name="PortalActivator" type="CollisionShape3D" parent="PortalActivator_A"]
+[node name="PortalActivator" type="CollisionShape3D" parent="PortalActivator_A" unique_id=998113903]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -2)
 shape = SubResource("BoxShape3D_tt16h")
 
-[node name="PortalActivator_B" type="Area3D" parent="." node_paths=PackedStringArray("portal_left", "portal_right")]
+[node name="PortalActivator_B" type="Area3D" parent="." unique_id=271995915 node_paths=PackedStringArray("portal_left", "portal_right")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 monitorable = false
 script = ExtResource("9_0dr2q")
 portal_left = NodePath("../Portal_BA")
 portal_right = NodePath("../Portal_BC")
 
-[node name="PortalActivator" type="CollisionShape3D" parent="PortalActivator_B"]
+[node name="PortalActivator" type="CollisionShape3D" parent="PortalActivator_B" unique_id=2079395505]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -2)
 shape = SubResource("BoxShape3D_tt16h")
 
-[node name="PortalActivator_C" type="Area3D" parent="." node_paths=PackedStringArray("portal_left", "portal_right")]
+[node name="PortalActivator_C" type="Area3D" parent="." unique_id=312879885 node_paths=PackedStringArray("portal_left", "portal_right")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
 monitorable = false
 script = ExtResource("9_0dr2q")
 portal_left = NodePath("../Portal_CB")
 portal_right = NodePath("../Portal_CA")
 
-[node name="PortalActivator" type="CollisionShape3D" parent="PortalActivator_C"]
+[node name="PortalActivator" type="CollisionShape3D" parent="PortalActivator_C" unique_id=1324579239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -2)
 shape = SubResource("BoxShape3D_tt16h")
 
-[node name="PortalUpdater" type="Node" parent="."]
+[node name="PortalUpdater" type="Node" parent="." unique_id=1804694434]
 script = SubResource("GDScript_0dr2q")
 
-[node name="Portal_AC" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_AC" type="Node3D" parent="." unique_id=2083914392 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 5.5)
@@ -449,19 +449,19 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="Portal_AC"]
+[node name="TeleportArea" type="Area3D" parent="Portal_AC" unique_id=650793139]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_AC/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_AC/TeleportArea" unique_id=456927516]
 shape = SubResource("BoxShape3D_0dr2q")
 
-[node name="Portal_AC_Mesh" type="MeshInstance3D" parent="Portal_AC"]
+[node name="Portal_AC_Mesh" type="MeshInstance3D" parent="Portal_AC" unique_id=935467780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_8qtme")
 
-[node name="Portal_AB" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_AB" type="Node3D" parent="." unique_id=1349651773 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 2, 5.5)
@@ -485,19 +485,19 @@ start_deactivated = false
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="Portal_AB"]
+[node name="TeleportArea" type="Area3D" parent="Portal_AB" unique_id=152584433]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_AB/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_AB/TeleportArea" unique_id=1227803212]
 shape = SubResource("BoxShape3D_0dr2q")
 
-[node name="Portal_AB_Mesh" type="MeshInstance3D" parent="Portal_AB"]
+[node name="Portal_AB_Mesh" type="MeshInstance3D" parent="Portal_AB" unique_id=1658956600]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ohal2")
 
-[node name="Portal_BC" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_BC" type="Node3D" parent="." unique_id=1824255003 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 2, 5.5)
@@ -521,19 +521,19 @@ start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="Portal_BC"]
+[node name="TeleportArea" type="Area3D" parent="Portal_BC" unique_id=50999952]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_BC/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_BC/TeleportArea" unique_id=2023870732]
 shape = SubResource("BoxShape3D_0qp41")
 
-[node name="Portal_BC_Mesh" type="MeshInstance3D" parent="Portal_BC"]
+[node name="Portal_BC_Mesh" type="MeshInstance3D" parent="Portal_BC" unique_id=775705179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_tt16h")
 
-[node name="Portal_BA" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_BA" type="Node3D" parent="." unique_id=1725595756 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 20, 2, 5.5)
@@ -557,19 +557,19 @@ start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="Portal_BA"]
+[node name="TeleportArea" type="Area3D" parent="Portal_BA" unique_id=1351711876]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_BA/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_BA/TeleportArea" unique_id=1239590144]
 shape = SubResource("BoxShape3D_0qp41")
 
-[node name="Portal_BA_Mesh" type="MeshInstance3D" parent="Portal_BA"]
+[node name="Portal_BA_Mesh" type="MeshInstance3D" parent="Portal_BA" unique_id=1836567005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_eqmv0")
 
-[node name="Portal_CA" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_CA" type="Node3D" parent="." unique_id=486153116 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40, 2, 5.5)
@@ -593,19 +593,19 @@ start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="Portal_CA"]
+[node name="TeleportArea" type="Area3D" parent="Portal_CA" unique_id=274160187]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_CA/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_CA/TeleportArea" unique_id=2077652730]
 shape = SubResource("BoxShape3D_0qp41")
 
-[node name="Portal_CA_Mesh" type="MeshInstance3D" parent="Portal_CA"]
+[node name="Portal_CA_Mesh" type="MeshInstance3D" parent="Portal_CA" unique_id=766558340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("9_qq1gc")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_0r3se")
 
-[node name="Portal_CB" type="Node3D" parent="." node_paths=PackedStringArray("exit_portal") groups=["portals"]]
+[node name="Portal_CB" type="Node3D" parent="." unique_id=392815147 node_paths=PackedStringArray("exit_portal") groups=["portals"]]
 process_priority = 100
 process_physics_priority = 100
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 40, 2, 5.5)
@@ -629,12 +629,12 @@ start_deactivated = true
 metadata/_custom_type_script = "uid://cw1r4c1d7beyv"
 metadata/_edit_group_ = true
 
-[node name="TeleportArea" type="Area3D" parent="Portal_CB"]
+[node name="TeleportArea" type="Area3D" parent="Portal_CB" unique_id=1876629550]
 
-[node name="Collider" type="CollisionShape3D" parent="Portal_CB/TeleportArea"]
+[node name="Collider" type="CollisionShape3D" parent="Portal_CB/TeleportArea" unique_id=1955124693]
 shape = SubResource("BoxShape3D_0qp41")
 
-[node name="Portal_CB_Mesh" type="MeshInstance3D" parent="Portal_CB"]
+[node name="Portal_CB_Mesh" type="MeshInstance3D" parent="Portal_CB" unique_id=1561587215]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.05, 0, 0, 0)
 layers = 128
 material_override = ExtResource("9_qq1gc")

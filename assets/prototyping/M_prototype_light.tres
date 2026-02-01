@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bbvyey800ra6l"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bbvyey800ra6l"]
 
 [ext_resource type="Texture2D" uid="uid://gh0otyh4xcj5" path="res://assets/prototyping/prototype_light.png" id="1_6eoeu"]
 
